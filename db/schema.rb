@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_201722) do
+ActiveRecord::Schema.define(version: 2021_07_06_212639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_07_06_201722) do
     t.string "name"
     t.integer "length"
     t.boolean "loop"
+    t.integer "national_park_id"
   end
 
 end
