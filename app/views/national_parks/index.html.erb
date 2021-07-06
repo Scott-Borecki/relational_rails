@@ -1,0 +1,9 @@
+<h1>All National Parks</h1>
+
+<% @national_parks.each do |national_park| %>
+  <h3><a href="/national_parks/<%= national_park.id %>"><%= national_park.name %></a></h3>
+  <h3><%= national_park.acreage %></h3>
+  <h3><%= national_park.seasonal %></h3>
+  <h3><%= national_park.created_at %></h3>
+  <h3><%= national_park.updated_at %></h3>
+<% end %>
