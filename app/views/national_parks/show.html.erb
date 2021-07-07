@@ -2,9 +2,9 @@
 
 <h1><%= @national_park.name %></h1>
 
-<p><%= @national_park.acreage %></p>
-<p><%= @national_park.is_seasonal %></p>
-<p><%= @national_park.created_at %></p>
-<p><%= @national_park.updated_at %></p>
+<p>Acreage: <%= @national_park.acreage %></p>
+<p>Seasonal?: <%= @national_park.is_seasonal %></p>
+<p>Created At: <%= @national_park.created_at %></p>
+<p>Updated At: <%= @national_park.updated_at %></p>
 
 <a href="/national_parks/<%= @national_park.id %>/trails">Trails in National Park Index</a>

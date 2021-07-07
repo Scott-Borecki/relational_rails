@@ -2,8 +2,9 @@
 
 <% @national_parks.each do |national_park| %>
   <h3><a href="/national_parks/<%= national_park.id %>"><%= national_park.name %></a></h3>
-  <h3><%= national_park.acreage %></h3>
-  <h3><%= national_park.is_seasonal %></h3>
-  <h3><%= national_park.created_at %></h3>
-  <h3><%= national_park.updated_at %></h3>
+  <p>Acreage: <%= national_park.acreage %></p>
+  <p>Seasonal?: <%= national_park.is_seasonal %></p>
+  <p>Created At: <%= national_park.created_at %></p>
+  <p>Updated At: <%= national_park.updated_at %></p>
+  <br>
 <% end %>
