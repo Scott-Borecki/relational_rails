@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 2021_07_07_180822) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "national_parks", force: :cascade do |t|
+    t.string "name"
+    t.integer "acreage"
+    t.boolean "is_seasonal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "campsites", force: :cascade do |t|
     t.string "name"
     t.boolean "tent_only"
@@ -34,4 +42,16 @@ ActiveRecord::Schema.define(version: 2021_07_07_180822) do
   end
 
   add_foreign_key "campsites", "campgrounds"
+
+  create_table "trails", force: :cascade do |t|
+    t.string "name"
+    t.integer "length"
+    t.boolean "is_loop"
+    t.bigint "national_park_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["national_park_id"], name: "index_trails_on_national_park_id"
+  end
+
+  add_foreign_key "trails", "national_parks"
 end
