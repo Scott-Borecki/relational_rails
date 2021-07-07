@@ -8,6 +8,7 @@ class NationalParksController < ApplicationController
   end
 
   def show_trails
-    @trails = Trail.where(national_park_id: NationalPark.find(params[:id]))
+    @national_park = NationalPark.find(params[:id])
+    @trails = @national_park.trails
   end
 end

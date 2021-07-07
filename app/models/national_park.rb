@@ -1,3 +1,3 @@
 class NationalPark < ApplicationRecord
-  has_many :trail
+  has_many :trails
 end

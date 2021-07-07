@@ -1,9 +1,12 @@
 <a href="/national_parks">National Park Index</a>
 
+<h1>Trails at <%= @national_park.name %> National Park</h1>
+
 <% @trails.each do |trail| %>
   <h3><a href="/trails/<%= trail.id %>"><%= trail.name %></a></h3>
-  <h3><%= trail.length %></h3>
-  <h3><%= trail.is_loop %></h3>
-  <h3><%= NationalPark.find(trail.national_park_id).name %></h3>
-  <h3><%= trail.updated_at %></h3>
+  <p>Length: <%= trail.length %></p>
+  <p>Loop?: <%= trail.is_loop %></p>
+  <p>Created At: <%= trail.created_at %></p>
+  <p>Updated At: <%= trail.updated_at %></p>
+  <br>
 <% end %>
