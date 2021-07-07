@@ -1,0 +1,11 @@
+<h1>All Campgrounds</h1>
+
+<% @campgrounds.each do |campground| %>
+  <h3><a href="/campgrounds/<%= campground.id %>"><%= campground.name %></a></h3>
+  <p>
+    Created at: <%= campground.created_at %></br>
+    Updated at: <%= campground.updated_at %></br>
+    Reservations Allowed: <%= campground.reservation_allowed %></br>
+    Max Nights Stay: <%= campground.max_nights %>
+  </p>
+<% end %>
