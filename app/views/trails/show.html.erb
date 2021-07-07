@@ -3,6 +3,7 @@
 <h1><%= @trail.name %></h1>
 
 <p><%= @trail.length %></p>
-<p><%= @trail.loop %></p>
+<p><%= @trail.is_loop %></p>
+<h3><%= NationalPark.find(@trail.national_park_id).name %></h3>
 <p><%= @trail.created_at %></p>
 <p><%= @trail.updated_at %></p>

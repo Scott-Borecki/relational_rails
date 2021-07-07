@@ -10,26 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_212639) do
+ActiveRecord::Schema.define(version: 2021_07_07_173246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "national_parks", force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string "name"
     t.integer "acreage"
-    t.boolean "seasonal"
+    t.boolean "is_seasonal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trails", force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string "name"
     t.integer "length"
-    t.boolean "loop"
-    t.integer "national_park_id"
+    t.boolean "is_loop"
+    t.bigint "national_park_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["national_park_id"], name: "index_trails_on_national_park_id"
   end
 
+  add_foreign_key "trails", "national_parks"
 end
