@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/', to: 'welcome#index'
 
   get '/campgrounds', to: 'campgrounds#index'
   get '/campgrounds/:id', to: 'campgrounds#show'
