@@ -49,4 +49,22 @@ RSpec.describe 'campsites index page' do
     click_link "#{@group_a.name}"
     expect(current_path).to eq("/campsites/#{@group_a.id}")
   end
+
+  it 'can link to other index pages' do
+    visit '/campsites'
+    click_link 'Campground Index'
+    expect(current_path).to eq('/campgrounds')
+
+    visit '/campsites'
+    click_link 'Campsite Index'
+    expect(current_path).to eq('/campsites')
+
+    visit '/campsites'
+    click_link 'National Park Index'
+    expect(current_path).to eq('/national_parks')
+
+    visit '/campsites'
+    click_link 'Trail Index'
+    expect(current_path).to eq('/trails')
+  end
 end

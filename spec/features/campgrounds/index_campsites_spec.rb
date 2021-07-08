@@ -47,4 +47,22 @@ RSpec.describe 'campground campsites index' do
     click_link "#{@site_18.name}"
     expect(current_path).to eq("/campsites/#{@site_18.id}")
   end
+
+  it 'can link to other index pages' do
+    visit "/campgrounds/#{@sunset_point.id}/campsites"
+    click_link 'Campground Index'
+    expect(current_path).to eq('/campgrounds')
+
+    visit "/campgrounds/#{@sunset_point.id}/campsites"
+    click_link 'Campsite Index'
+    expect(current_path).to eq('/campsites')
+
+    visit "/campgrounds/#{@sunset_point.id}/campsites"
+    click_link 'National Park Index'
+    expect(current_path).to eq('/national_parks')
+
+    visit "/campgrounds/#{@sunset_point.id}/campsites"
+    click_link 'Trail Index'
+    expect(current_path).to eq('/trails')
+  end
 end

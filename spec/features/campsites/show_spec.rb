@@ -26,9 +26,21 @@ RSpec.describe 'campsite show page' do
     expect(page).to_not have_content(@site_18.name)
   end
 
-  it 'can link to return to campsites index' do
+  it 'can link to other index pages' do
+    visit "/campsites/#{@site_15.id}"
+    click_link 'Campground Index'
+    expect(current_path).to eq('/campgrounds')
+
     visit "/campsites/#{@site_15.id}"
     click_link 'Campsite Index'
-    expect(current_path).to eq("/campsites")
+    expect(current_path).to eq('/campsites')
+
+    visit "/campsites/#{@site_15.id}"
+    click_link 'National Park Index'
+    expect(current_path).to eq('/national_parks')
+
+    visit "/campsites/#{@site_15.id}"
+    click_link 'Trail Index'
+    expect(current_path).to eq('/trails')
   end
 end

@@ -44,4 +44,22 @@ RSpec.describe 'campgrounds index page' do
     click_link "#{@chatfield.name}"
     expect(current_path).to eq("/campgrounds/#{@chatfield.id}")
   end
+
+  it 'can link to other index pages' do
+    visit '/campgrounds'
+    click_link 'Campground Index'
+    expect(current_path).to eq('/campgrounds')
+
+    visit '/campgrounds'
+    click_link 'Campsite Index'
+    expect(current_path).to eq('/campsites')
+
+    visit '/campgrounds'
+    click_link 'National Park Index'
+    expect(current_path).to eq('/national_parks')
+
+    visit '/campgrounds'
+    click_link 'Trail Index'
+    expect(current_path).to eq('/trails')
+  end
 end
