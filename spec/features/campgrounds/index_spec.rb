@@ -14,4 +14,18 @@ RSpec.describe 'campgrounds index page' do
     expect(page).to have_content(@cherry_creek.name)
     expect(page).to have_content(@chatfield.name)
   end
+
+  it 'can link to show a campground' do
+    visit '/campgrounds'
+    click_link "#{@sunset_point.name}"
+    expect(current_path).to eq("/campgrounds/#{@sunset_point.id}")
+
+    visit '/campgrounds'
+    click_link "#{@cherry_creek.name}"
+    expect(current_path).to eq("/campgrounds/#{@cherry_creek.id}")
+
+    visit '/campgrounds'
+    click_link "#{@chatfield.name}"
+    expect(current_path).to eq("/campgrounds/#{@chatfield.id}")
+  end
 end
