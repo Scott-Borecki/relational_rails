@@ -20,4 +20,14 @@ describe NationalPark, type: :model do
       end
     end
   end
+
+  describe 'instance methods' do
+    describe '#trail_count' do
+      it 'can return the number of trails associated with the national park' do
+        expect(@denali.trail_count).to eq(2)
+        expect(@katmai.trail_count).to eq(1)
+        expect(@kenai_fjords.trail_count).to eq(1)
+      end
+    end
+  end
 end
