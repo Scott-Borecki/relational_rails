@@ -44,28 +44,24 @@ RSpec.describe "national parks index page" do
 
   it 'can link to trail index' do
     visit "/national_parks"
-    save_and_open_page
     click_link 'Trail Index'
     expect(current_path).to eq('/trails')
   end
 
   it 'can link to national park index' do
     visit "/national_parks"
-    save_and_open_page
     click_link 'National Park Index'
     expect(current_path).to eq('/national_parks')
   end
 
   it 'can link to campground index' do
     visit "/national_parks"
-    save_and_open_page
     click_link 'Campground Index'
     expect(current_path).to eq('/campgrounds')
   end
 
   it 'can link to campsite index' do
     visit "/national_parks"
-    save_and_open_page
     click_link 'Campsite Index'
     expect(current_path).to eq('/campsites')
   end
