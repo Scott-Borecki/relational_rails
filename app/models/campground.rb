@@ -1,3 +1,3 @@
 class Campground < ApplicationRecord
-  has_many :campsite
+  has_many :campsites
 end
