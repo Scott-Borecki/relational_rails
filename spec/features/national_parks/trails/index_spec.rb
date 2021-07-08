@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "national parks show_trails page" do
-  it 'can display show_trails page' do
+  it 'can display all of the trails at the national park' do
     denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
     katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
     kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
