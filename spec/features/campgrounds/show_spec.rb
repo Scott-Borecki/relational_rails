@@ -28,6 +28,15 @@ RSpec.describe 'campground show page' do
     expect(page).to_not have_content(@sunset_point.name)
   end
 
+  it "can show the number of campground's campsites" do
+    visit "/campgrounds/#{@sunset_point.id}"
+    expect(page).to have_content("Number of Campsites: #{@sunset_point.campsite_count}")
+
+    visit "/campgrounds/#{@cherry_creek.id}"
+    expect(page).to have_content("Number of Campsites: #{@cherry_creek.campsite_count}")
+
+  end
+
   it 'can link to list of campsites in campground' do
     visit "/campgrounds/#{@sunset_point.id}"
     click_link 'Campsites at Campground'
@@ -42,5 +51,11 @@ RSpec.describe 'campground show page' do
     visit "/campgrounds/#{@sunset_point.id}"
     click_link 'Campground Index'
     expect(current_path).to eq("/campgrounds")
+  end
+
+  it 'can link to campgsites index' do
+    visit "/campgrounds/#{@sunset_point.id}"
+    click_link 'Campsite Index'
+    expect(current_path).to eq("/campsites")
   end
 end
