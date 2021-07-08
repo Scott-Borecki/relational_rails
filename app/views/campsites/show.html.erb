@@ -1,6 +1,5 @@
-<a href="/campsites">Campsite Index</a>
-
 <h1><%= @campsite.name %></h1>
+
 <p>
   <%= "Campground: #{Campground.find(@campsite.campground_id).name}" %><br>
   <%= "Created at: #{@campsite.created_at}" %><br>
