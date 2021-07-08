@@ -9,10 +9,26 @@ RSpec.describe 'campgrounds index page' do
 
   it 'shows all the campgrounds and their names' do
     visit '/campgrounds'
-    
+
     expect(page).to have_content(@sunset_point.name)
     expect(page).to have_content(@cherry_creek.name)
     expect(page).to have_content(@chatfield.name)
+  end
+
+  it 'shows all the campgrounds and their created time' do
+    visit '/campgrounds'
+
+    expect(page).to have_content(@sunset_point.created_at)
+    expect(page).to have_content(@cherry_creek.created_at)
+    expect(page).to have_content(@chatfield.created_at)
+  end
+
+  it 'shows all campgrounds sorted by recently created' do
+    visit '/campgrounds'
+
+    expect(@chatfield.name).to appear_before(@cherry_creek.name)
+    expect(@cherry_creek.name).to appear_before(@sunset_point.name)
+    expect(@sunset_point.name).to_not appear_before(@cherry_creek.name)
   end
 
   it 'can link to show a campground' do
