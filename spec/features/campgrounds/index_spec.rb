@@ -9,7 +9,7 @@ RSpec.describe 'campgrounds index page' do
 
   it 'shows all the campgrounds and their names' do
     visit '/campgrounds'
-
+    
     expect(page).to have_content(@sunset_point.name)
     expect(page).to have_content(@cherry_creek.name)
     expect(page).to have_content(@chatfield.name)
