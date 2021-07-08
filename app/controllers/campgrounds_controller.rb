@@ -1,6 +1,6 @@
 class CampgroundsController < ApplicationController
   def index
-    @campgrounds = Campground.all
+    @campgrounds = Campground.order_by_recently_created
   end
 
   def show

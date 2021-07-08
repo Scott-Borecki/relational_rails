@@ -2,11 +2,4 @@
 
 <% @campsites.each do |campsite| %>
   <h3><a href="/campsites/<%= campsite.id %>"><%= campsite.name %></a></h3>
-  <p>
-    <%= "Campground: #{Campground.find(campsite.campground_id).name}" %></br>
-    <%= "Created at: #{campsite.created_at}" %></br>
-    <%= "Updated at: #{campsite.updated_at}" %></br>
-    <%= "Campsite is Tent Only: #{campsite.tent_only}" %></br>
-    <%= "Overnight Fee: #{campsite.overnight_fee}" %>
-  </p>
 <% end %>

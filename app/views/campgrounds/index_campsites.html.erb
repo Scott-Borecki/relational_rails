@@ -1,14 +1,14 @@
-<a href="/campgrounds">Campground Index</a>
-
-<h1><a href="/campgrounds/<%= @campground.id %>"><%= @campground.name %></a></h1>
+<h1>Campsites at <%= @campground.name %></h1>
 
 <% @campsites.each do |campsite| %>
   <h3><a href="/campsites/<%= campsite.id %>"><%= campsite.name %></a></h3>
   <p>
-    Campground: <%= Campground.find(campsite.campground_id).name %></br>
-    Created at: <%= campsite.created_at %></br>
-    Updated at: <%= campsite.updated_at %></br>
-    Campsite is Tent Only: <%= campsite.tent_only %></br>
+    Campground: <%= Campground.find(campsite.campground_id).name %><br>
+    Created at: <%= campsite.created_at %><br>
+    Updated at: <%= campsite.updated_at %><br>
+    Campsite is Tent Only: <%= campsite.tent_only %><br>
     Overnight Fee: <%= campsite.overnight_fee %>
   </p>
 <% end %>
+
+<a href="/campgrounds/<%= @campground.id %>">Campground Details</a>
