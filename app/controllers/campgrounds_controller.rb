@@ -16,7 +16,11 @@ class CampgroundsController < ApplicationController
   end
 
   def create
-    campground = Campground.create(name: params[:name], reservation_allowed: params[:reservation_allowed], max_nights: params[:max_nights])
+    campground = Campground.create(campground_params)
     redirect_to '/campgrounds'
+  end
+
+  def campground_params
+    params.permit(:name, :reservation_allowed, :max_nights)
   end
 end
