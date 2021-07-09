@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/national_parks/new', to: 'national_parks#new'
   post '/national_parks', to: 'national_parks#create'
   get '/national_parks/:id', to: "national_parks#show"
+  get '/national_parks/:id/edit', to: 'national_parks#edit'
+  post '/national_parks/:id', to: 'national_parks#update'
 
   get '/national_parks/:national_park_id/trails', to: "national_park_trails#index"
 
