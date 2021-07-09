@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/campgrounds/new', to: 'campgrounds#new'
   post '/campgrounds', to: 'campgrounds#create'
   get '/campgrounds/:id', to: 'campgrounds#show'
-  get '/campgrounds/:id/campsites', to: 'campgrounds#index_campsites'
+  get '/campgrounds/:id/campsites', to: 'campground_campsites#index'
 
   get '/campsites', to: 'campsites#index'
   get '/campsites/:id', to: 'campsites#show'
