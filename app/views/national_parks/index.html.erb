@@ -3,3 +3,5 @@
 <% @national_parks.each do |national_park| %>
   <h3><a href="/national_parks/<%= national_park.id %>"><%= national_park.name %></a> Created At: <%= national_park.created_at %></h3>
 <% end %>
+
+<%= link_to "New National Park", "/national_parks/new" %>

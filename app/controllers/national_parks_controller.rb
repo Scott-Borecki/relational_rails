@@ -6,4 +6,17 @@ class NationalParksController < ApplicationController
   def show
     @national_park = NationalPark.find(params[:id])
   end
+
+  def new
+  end
+
+  def create
+    NationalPark.create(national_park_params)
+    redirect_to '/national_parks'
+  end
+
+  private
+  def national_park_params
+    params.permit(:name, :acreage, :is_seasonal)
+  end
 end
