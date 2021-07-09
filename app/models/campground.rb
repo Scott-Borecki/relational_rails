@@ -6,6 +6,6 @@ class Campground < ApplicationRecord
   end
 
   def campsite_count
-    campsites.where(campground_id: id).count
+    campsites.length
   end
 end

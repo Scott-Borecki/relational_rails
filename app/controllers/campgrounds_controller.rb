@@ -11,4 +11,12 @@ class CampgroundsController < ApplicationController
     show
     @campsites = Campsite.where(campground_id: Campground.find(params[:id]))
   end
+
+  def new
+  end
+
+  def create
+    campground = Campground.create(name: params[:name], reservation_allowed: params[:reservation_allowed], max_nights: params[:max_nights])
+    redirect_to '/campgrounds'
+  end
 end

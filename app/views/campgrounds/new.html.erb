@@ -1,0 +1,10 @@
+<%= form_with url: '/campgrounds', method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :reservation_allowed %>
+  <%= form.text_field :reservation_allowed %>
+  <%= form.label :max_nights %>
+  <%= form.text_field :max_nights %>
+
+  <%= form.submit 'Create Campground' %>
+<% end %>

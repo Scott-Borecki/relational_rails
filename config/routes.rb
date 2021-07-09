@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#index'
 
   get '/campgrounds', to: 'campgrounds#index'
+  get '/campgrounds/new', to: 'campgrounds#new'
+  post '/campgrounds', to: 'campgrounds#create'
   get '/campgrounds/:id', to: 'campgrounds#show'
   get '/campgrounds/:id/campsites', to: 'campgrounds#index_campsites'
-  
+
   get '/campsites', to: 'campsites#index'
   get '/campsites/:id', to: 'campsites#show'
 
