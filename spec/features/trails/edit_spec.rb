@@ -30,4 +30,28 @@ RSpec.describe 'trails edit page' do
     expect(current_path).to eq("/trails/#{@triple.id}")
     expect(page).to have_content('Triple Lakes Trail')
   end
+
+  it 'can link to trail index' do
+    visit "/trails/#{@triple.id}/edit"
+    click_link 'Trail Index'
+    expect(current_path).to eq('/trails')
+  end
+
+  it 'can link to national park index' do
+    visit "/trails/#{@triple.id}/edit"
+    click_link 'National Park Index'
+    expect(current_path).to eq('/national_parks')
+  end
+
+  it 'can link to campground index' do
+    visit "/trails/#{@triple.id}/edit"
+    click_link 'Campground Index'
+    expect(current_path).to eq('/campgrounds')
+  end
+
+  it 'can link to campsite index' do
+    visit "/trails/#{@triple.id}/edit"
+    click_link 'Campsite Index'
+    expect(current_path).to eq('/campsites')
+  end
 end
