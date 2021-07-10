@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'trails edit page' do
   before :each do
     @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
-    @triple = @denali.trails.create!(name: 'Tripl Lakes Trail', length: 9, is_loop: false)
+    @triple = @denali.trails.create!(name: 'Tripl Lakes Trail', length: 9, is_loop: true)
   end
 
   it 'can link to the trail edit page' do
@@ -23,7 +23,7 @@ RSpec.describe 'trails edit page' do
 
     fill_in('Name', with: 'Triple Lakes Trail')
     fill_in('Length', with: '9')
-    fill_in('Is loop', with: 'false')
+    fill_in('Is loop', with: 'true')
     select('Denali', :from => 'national_park_id')
     click_button('Update Trail')
 

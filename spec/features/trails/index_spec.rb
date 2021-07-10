@@ -12,7 +12,7 @@ RSpec.describe "trails index page" do
     @single = @kenai_fjords.trails.create!(name: 'Single Lake Trail', length: 3, is_loop: true)
   end
 
-  it 'can display index page' do
+  it 'can display index page with only loop trails' do
     visit '/trails'
 
     expect(page).to have_content(@single.name)
@@ -29,19 +29,8 @@ RSpec.describe "trails index page" do
     expect(page).to have_content("Created At: #{@double.created_at}")
     expect(page).to have_content("Updated At: #{@double.updated_at}")
 
-    expect(page).to have_content(@triple.name)
-    expect(page).to have_content("Length: #{@triple.length}")
-    expect(page).to have_content("Loop?: #{@triple.is_loop}")
-    expect(page).to have_content("National Park: Denali")
-    expect(page).to have_content("Created At: #{@triple.created_at}")
-    expect(page).to have_content("Updated At: #{@triple.updated_at}")
-
-    expect(page).to have_content(@quadruple.name)
-    expect(page).to have_content("Length: #{@quadruple.length}")
-    expect(page).to have_content("Loop?: #{@quadruple.is_loop}")
-    expect(page).to have_content("National Park: Denali")
-    expect(page).to have_content("Created At: #{@quadruple.created_at}")
-    expect(page).to have_content("Updated At: #{@quadruple.updated_at}")
+    expect(page).to_not have_content(@triple.name)
+    expect(page).to_not have_content(@quadruple.name)
   end
 
   it 'can link to trail index' do
