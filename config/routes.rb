@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   get '/trails/new', to: 'trails#new'
   post '/trails', to: 'trails#create'
   get '/trails/:id', to: 'trails#show'
+  get '/trails/:id/edit', to: 'trails#edit'
+  post '/trails/:id', to: 'trails#update'
 end
