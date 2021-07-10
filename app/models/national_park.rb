@@ -8,4 +8,8 @@ class NationalPark < ApplicationRecord
   def trail_count
     trails.length
   end
+
+  def sort_by_name
+    trails.order(name: :asc)
+  end
 end

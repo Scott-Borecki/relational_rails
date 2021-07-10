@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe NationalPark, type: :model do
   it { should have_many :trails }
+
   before :each do
     @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
     @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
@@ -27,6 +28,15 @@ describe NationalPark, type: :model do
         expect(@denali.trail_count).to eq(2)
         expect(@katmai.trail_count).to eq(1)
         expect(@kenai_fjords.trail_count).to eq(1)
+      end
+    end
+
+    describe '#sort_by_name' do
+      it 'can sort the trails associated to the national park by name' do
+        berry = @denali.trails.create!(name: 'Berry Trail', length: 4, is_loop: true)
+        deer = @denali.trails.create!(name: 'Deer Trail', length: 8, is_loop: true)
+
+        expect(@denali.sort_by_name).to eq([berry, deer, @quadruple, @triple])
       end
     end
   end

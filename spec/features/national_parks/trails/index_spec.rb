@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "national parks show_trails page" do
+RSpec.describe "national parks index page" do
   before :each do
     @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
     @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
@@ -42,6 +42,22 @@ RSpec.describe "national parks show_trails page" do
     expect(page).to have_content("Loop?: #{@single.is_loop}")
     expect(page).to have_content("Created At: #{@single.created_at}")
     expect(page).to have_content("Updated At: #{@single.updated_at}")
+  end
+
+  it 'can link to sort trails alphabetically by name' do
+    visit "/national_parks/#{@denali.id}/trails"
+
+    click_link "Sort Trails By Name"
+
+    expect(current_path).to eq("/national_parks/#{@denali.id}/trails")
+  end
+
+  it 'can sort trails alphabetically by name' do
+    visit "/national_parks/#{@denali.id}/trails"
+
+    click_link "Sort Trails By Name"
+
+    expect(@quadruple.name).to appear_before(@triple.name)
   end
 
   it 'can link to trail index' do
