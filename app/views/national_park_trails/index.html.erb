@@ -9,4 +9,4 @@
   <br>
 <% end %>
 
-<%= link_to 'Sort Trails By Name', sort: "name_asc" %>
+<%= link_to 'Sort Trails By Name', "/national_parks/#{@national_park.id}/trails?sort=name_asc" %>
