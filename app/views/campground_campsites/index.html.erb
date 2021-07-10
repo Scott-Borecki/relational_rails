@@ -9,7 +9,8 @@
     Campsite is Tent Only: <%= campsite.tent_only %><br>
     Overnight Fee: <%= campsite.overnight_fee %>
   </p>
+  <%= button_to 'Edit', "/campsites/#{campsite.id}/edit", method: :get %>
 <% end %>
 
 <a href="/campgrounds/<%= @campground.id %>">Campground Details</a><br>
-<a href="/campgrounds/<%= @campground.id %>/campsites/new">Create Campsite</a>
+<a href="/campgrounds/<%= @campground.id %>/campsites/new">Create Campsite</a><br>

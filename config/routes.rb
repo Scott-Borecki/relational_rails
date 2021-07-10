@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post '/campgrounds/:id/campsites', to: 'campsites#create'
   get '/campgrounds/:id/campsites', to: 'campground_campsites#index'
   get '/campsites', to: 'campsites#index'
+  get '/campsites/:id/edit', to: 'campsites#edit'
+  patch '/campsites/:id', to: 'campsites#update'
   get '/campsites/:id', to: 'campsites#show'
 
   get '/national_parks', to: 'national_parks#index'

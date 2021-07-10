@@ -1,0 +1,10 @@
+<%= form_with url: "/campsites/#{@campsite.id}", method: :patch, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :tent_only %>
+  <%= form.text_field :tent_only %>
+  <%= form.label :overnight_fee %>
+  <%= form.text_field :overnight_fee %>
+
+  <%= form.submit 'Update Campsite' %>
+<% end %>

@@ -17,6 +17,17 @@ class CampsitesController < ApplicationController
     redirect_to "/campgrounds/#{@campground.id}/campsites"
   end
 
+  def edit
+    @campsite = Campsite.find(params[:id])
+  end
+
+  def update
+    @campsite = Campsite.find(params[:id])
+    @campsite.update(campsite_params)
+    redirect_to "/campsites/#{@campsite.id}"
+  end
+
+private
   def campsite_params
     params.permit(:name, :tent_only, :overnight_fee)
   end
