@@ -3,7 +3,8 @@
 <% @campgrounds.each do |campground| %>
   <h3>
     <a href="/campgrounds/<%= campground.id %>"><%= campground.name %></a>
-    <%= campground.created_at %>
+    <%= campground.created_at %><br>
+    <%= button_to 'Edit', "/campgrounds/#{campground.id}/edit", method: :get %>
   </h3>
 <% end %>
 

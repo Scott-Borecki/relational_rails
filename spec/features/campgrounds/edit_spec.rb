@@ -21,4 +21,10 @@ RSpec.describe 'edit campground' do
     expect(current_path).to eq("/campgrounds/#{@campground.id}")
     expect(page).to have_content('Echo Lake Campground')
   end
+
+  it 'can link to edit campground on idex page' do
+    visit '/campgrounds'
+    click_button "Edit", match: :first
+    expect(current_path).to eq("/campgrounds/#{@campground.id}/edit")
+  end
 end
