@@ -25,27 +25,15 @@ RSpec.describe 'the national parks trails new page' do
     expect(page).to have_content('Five Lakes')
   end
 
-  it 'can link to trail index' do
-    visit "/national_parks/#{@denali.id}/trails/new"
-    click_link 'Trail Index'
-    expect(current_path).to eq('/trails')
-  end
-
-  it 'can link to national park index' do
-    visit "/national_parks/#{@denali.id}/trails/new"
-    click_link 'National Park Index'
-    expect(current_path).to eq('/national_parks')
-  end
-
-  it 'can link to campground index' do
-    visit "/national_parks/#{@denali.id}/trails/new"
-    click_link 'Campground Index'
-    expect(current_path).to eq('/campgrounds')
-  end
-
-  it 'can link to campsite index' do
-    visit "/national_parks/#{@denali.id}/trails/new"
-    click_link 'Campsite Index'
-    expect(current_path).to eq('/campsites')
+  it 'can link to the index pages' do
+    pages = [["Trail Index", "/trails"],
+             ["National Park Index", "/national_parks"],
+             ["Campground Index", "/campgrounds"],
+             ["Campsite Index", "/campsites"]]
+    pages.each do |link_text, path|
+      visit "/national_parks/#{@denali.id}/trails/new"
+      click_link "#{link_text}"
+      expect(current_path).to eq("#{path}")
+    end
   end
 end
