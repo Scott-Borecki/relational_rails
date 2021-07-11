@@ -1,6 +1,6 @@
 <h1>All Campsites</h1>
 
-<% @campsites.each do |campsite| %>
+<% @campsites.tent_only.each do |campsite| %>
   <h3>
     <a href="/campsites/<%= campsite.id %>"><%= campsite.name %></a>
     <%= button_to "Edit #{campsite.name}", "/campsites/#{campsite.id}/edit", method: :get %>

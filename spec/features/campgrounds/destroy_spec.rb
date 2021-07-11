@@ -4,7 +4,7 @@ RSpec.describe 'delete a campground' do
   before :each do
     @campground = Campground.create!(name: "Sunset Point Campground", reservation_allowed: false, max_nights: 7)
     @site_15 = @campground.campsites.create!(name: "Site 15", tent_only: true, overnight_fee: 26)
-    @site_18 = @campground.campsites.create!(name: "Site 18", tent_only: false, overnight_fee: 52)
+    @site_18 = @campground.campsites.create!(name: "Site 18", tent_only: true, overnight_fee: 52)
   end
 
   it 'can delete a campground and campsites in campground' do
