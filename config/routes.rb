@@ -25,4 +25,5 @@ Rails.application.routes.draw do
   get '/trails/:id', to: 'trails#show'
   get '/trails/:id/edit', to: 'trails#edit'
   post '/trails/:id', to: 'trails#update'
+  delete 'trails/:id', to: 'trails#destroy'
 end

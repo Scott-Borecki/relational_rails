@@ -24,6 +24,8 @@ RSpec.describe "trails index page" do
       expect(page).to have_content("National Park: #{NationalPark.find(trail.national_park_id).name}")
       expect(page).to have_content("Created At: #{trail.created_at}")
       expect(page).to have_content("Updated At: #{trail.updated_at}")
+      expect(page).to have_link("Update #{trail.name}")
+      expect(page).to have_link("Delete #{trail.name}")
     end
 
     expect(page).to_not have_content(@triple.name)
