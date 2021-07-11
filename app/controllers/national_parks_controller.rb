@@ -1,6 +1,10 @@
 class NationalParksController < ApplicationController
   def index
-    @national_parks = NationalPark.order_by_most_recent
+    if params[:sort] == "most_trails"
+      @national_parks = NationalPark.order_by_most_trails
+    else
+      @national_parks = NationalPark.order_by_most_recent
+    end
   end
 
   def show

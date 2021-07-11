@@ -7,6 +7,13 @@ RSpec.describe "national parks index page" do
       @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
       @kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
 
+      @single = @kenai_fjords.trails.create!(name: 'Single Lake Trail', length: 3, is_loop: true)
+      @double = @katmai.trails.create!(name: 'Double Lakes Trail', length: 6, is_loop: true)
+      @triple = @denali.trails.create!(name: 'Triple Lakes Trail', length: 9, is_loop: true)
+      @quadruple = @denali.trails.create!(name: 'Quadruple Lakes Trail', length: 12, is_loop: true)
+      @five = @kenai_fjords.trails.create!(name: 'Five Lakes Trail', length: 5, is_loop: true)
+      @single = @denali.trails.create!(name: 'Six Lakes Trail', length: 6, is_loop: true)
+
       @parks = [@denali, @katmai, @kenai_fjords]
     end
 
@@ -26,6 +33,14 @@ RSpec.describe "national parks index page" do
       end
     end
 
+    it 'can link to the new national park page' do
+      visit '/national_parks'
+
+      click_link "New National Park"
+
+      expect(current_path).to eq('/national_parks/new')
+    end
+
     it 'can link to the index pages' do
       pages = [["Trail Index", "/trails"],
                ["National Park Index", "/national_parks"],
@@ -36,6 +51,17 @@ RSpec.describe "national parks index page" do
         click_link "#{link_text}"
         expect(current_path).to eq("#{path}")
       end
+    end
+
+    it 'can sort national parks by number of trails' do
+      visit '/national_parks'
+
+      click_link "Sort By Number of Trails"
+
+      expect(current_path).to eq('/national_parks')
+      expect(@denali.name).to appear_before(@katmai.name)
+      expect(@denali.name).to appear_before(@kenai_fjords.name)
+      expect(@kenai_fjords.name).to appear_before(@katmai.name)
     end
   end
 

@@ -20,6 +20,14 @@ describe NationalPark, type: :model do
         expect(NationalPark.order_by_most_recent).to eq([@kenai_fjords, @katmai, @denali])
       end
     end
+
+    describe '::order_by_most_trails' do
+      it 'can return the national parks by most trails' do
+        @kenai_fjords.trails.create!(name: 'Five Lakes Trail', length: 5, is_loop: true)
+        @denali.trails.create!(name: 'Six Lakes Trail', length: 6, is_loop: true)
+        expect(NationalPark.order_by_most_trails).to eq([@denali, @kenai_fjords, @katmai])
+      end
+    end
   end
 
   describe 'instance methods' do
