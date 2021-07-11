@@ -8,14 +8,14 @@ RSpec.describe 'delete a campground' do
   end
 
   it 'can delete a campground and campsites in campground' do
-    visit "campgrounds/#{@campground.id}"
+    visit "/campgrounds/#{@campground.id}"
     expect(page).to have_content('Sunset Point Campground')
 
     visit '/campsites'
     expect(page).to have_content('Site 15')
     expect(page).to have_content('Site 18')
 
-    visit "campgrounds/#{@campground.id}"
+    visit "/campgrounds/#{@campground.id}"
 
     click_button 'Delete'
 
@@ -25,5 +25,16 @@ RSpec.describe 'delete a campground' do
     visit '/campsites'
     expect(page).to_not have_content('Site 15')
     expect(page).to_not have_content('Site 18')
+  end
+
+  it 'can delete a campground from index page' do
+    visit "/campgrounds"
+
+    expect(page).to have_content('Sunset Point Campground')
+
+    click_button "Delete #{@campground.name}"
+
+    expect(current_path).to eq('/campgrounds')
+    expect(page).to_not have_content('Sunset Point Campground')
   end
 end

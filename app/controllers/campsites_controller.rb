@@ -27,6 +27,12 @@ class CampsitesController < ApplicationController
     redirect_to "/campsites/#{@campsite.id}"
   end
 
+  def destroy
+    campsites = Campsite.find(params[:id])
+    campsites.destroy
+    redirect_to '/campsites'
+  end
+
 private
   def campsite_params
     params.permit(:name, :tent_only, :overnight_fee)
