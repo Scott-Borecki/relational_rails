@@ -6,4 +6,4 @@
 <p>Created At: <%= @trail.created_at %></p>
 <p>Updated At: <%= @trail.updated_at %></p>
 
-<%= link_to 'Update Trail', "/trails/#{@trail.id}/edit" %>
+<%= link_to "Update #{@trail.name}", "/trails/#{@trail.id}/edit" %>

@@ -9,7 +9,7 @@ RSpec.describe 'trails edit page' do
   it 'can link to the trail edit page' do
     visit "/trails/#{@triple.id}"
 
-    click_link 'Update Trail'
+    click_link "Update #{@triple.name}"
 
     expect(current_path).to eq("/trails/#{@triple.id}/edit")
   end
