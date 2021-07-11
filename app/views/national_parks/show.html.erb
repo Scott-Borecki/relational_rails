@@ -5,6 +5,7 @@
 <p>Number of Trails: <%= @national_park.trail_count %></p>
 <p>Created At: <%= @national_park.created_at %></p>
 <p>Updated At: <%= @national_park.updated_at %></p>
+<p><%= link_to "Delete #{@national_park.name}", "/national_parks/#{@national_park.id}", method: :delete%></p>
 <br>
 
 <a href="/national_parks/<%= @national_park.id %>/trails">Trails Index in National Park</a>

@@ -1,5 +1,5 @@
 class NationalPark < ApplicationRecord
-  has_many :trails
+  has_many :trails, :dependent => :destroy
 
   def self.order_by_most_recent
     order(created_at: :desc)

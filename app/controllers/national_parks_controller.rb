@@ -25,8 +25,14 @@ class NationalParksController < ApplicationController
     redirect_to "/national_parks/#{national_park.id}"
   end
 
+  def destroy
+    national_park = NationalPark.find(params[:id])
+    national_park.destroy
+    redirect_to "/national_parks"
+  end
+
   private
-  
+
   def national_park_params
     params.permit(:name, :acreage, :is_seasonal)
   end

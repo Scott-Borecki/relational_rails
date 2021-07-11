@@ -14,10 +14,11 @@ Rails.application.routes.draw do
   get '/national_parks/:id', to: "national_parks#show"
   get '/national_parks/:id/edit', to: 'national_parks#edit'
   post '/national_parks/:id', to: 'national_parks#update'
+  delete '/national_parks/:id', to: 'national_parks#destroy'
 
   get '/national_parks/:national_park_id/trails', to: "national_park_trails#index"
   get '/national_parks/:national_park_id/trails/new', to: "national_park_trails#new"
-  post 'national_parks/:national_park_id/trails', to: 'national_park_trails#create'
+  post '/national_parks/:national_park_id/trails', to: 'national_park_trails#create'
 
 
   get '/trails', to: 'trails#index'
