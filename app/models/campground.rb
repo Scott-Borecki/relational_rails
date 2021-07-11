@@ -8,4 +8,8 @@ class Campground < ApplicationRecord
   def campsite_count
     campsites.length
   end
+
+  def order_campsites_by_name
+    campsites.order(:name)
+  end
 end

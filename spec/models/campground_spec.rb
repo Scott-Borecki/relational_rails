@@ -28,5 +28,14 @@ RSpec.describe Campground do
         expect(@sunset_point.campsite_count).to eq(2)
       end
     end
+
+    describe '#order_campsites_by_name' do
+      it 'can order campsites by name' do
+        site_18 = @sunset_point.campsites.create!(name: "Site 18", tent_only: false, overnight_fee: 52)
+        site_15 = @sunset_point.campsites.create!(name: "Site 15", tent_only: true, overnight_fee: 26)
+
+        expect(@sunset_point.order_campsites_by_name).to eq([site_15, site_18])
+      end
+    end
   end
 end

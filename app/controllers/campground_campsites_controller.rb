@@ -1,6 +1,10 @@
 class CampgroundCampsitesController < ApplicationController
   def index
     @campground = Campground.find(params[:id])
-    @campsites = @campground.campsites
+    if params[:sort]
+      @campsites = @campground.order_campsites_by_name
+    else
+      @campsites = @campground.campsites
+    end
   end
 end
