@@ -26,25 +26,25 @@ RSpec.describe 'the national parks trails new page' do
   end
 
   it 'can link to trail index' do
-    visit '/trails/new'
+    visit "/national_parks/#{@denali.id}/trails/new"
     click_link 'Trail Index'
     expect(current_path).to eq('/trails')
   end
 
   it 'can link to national park index' do
-    visit '/trails/new'
+    visit "/national_parks/#{@denali.id}/trails/new"
     click_link 'National Park Index'
     expect(current_path).to eq('/national_parks')
   end
 
   it 'can link to campground index' do
-    visit '/trails/new'
+    visit "/national_parks/#{@denali.id}/trails/new"
     click_link 'Campground Index'
     expect(current_path).to eq('/campgrounds')
   end
 
   it 'can link to campsite index' do
-    visit '/trails/new'
+    visit "/national_parks/#{@denali.id}/trails/new"
     click_link 'Campsite Index'
     expect(current_path).to eq('/campsites')
   end
