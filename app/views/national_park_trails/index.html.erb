@@ -9,4 +9,6 @@
   <br>
 <% end %>
 
+<%= link_to 'Create Trail', "/national_parks/#{@national_park.id}/trails/new" %>
+
 <%= link_to 'Sort Trails By Name', "/national_parks/#{@national_park.id}/trails?sort=name_asc" %>
