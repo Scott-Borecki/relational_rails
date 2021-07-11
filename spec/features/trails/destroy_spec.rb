@@ -8,8 +8,18 @@ RSpec.describe 'trail destroy page' do
     @quadruple = @denali.trails.create!(name: 'Quadruple Lakes Trail', length: 12, is_loop: true)
   end
 
-  it 'can delete record of trail' do
+  it 'can delete record of trail from trails index' do
     visit "/trails"
+
+    click_link "Delete #{@triple.name}"
+
+    expect(current_path).to eq("/trails")
+    expect(page).to_not have_content('Triple Lakes Trail')
+    expect(page).to have_content('Quadruple Lakes Trail')
+  end
+
+  it 'can delete record of trail from national park trails index' do
+    visit "/national_parks/#{@denali.id}/trails"
 
     click_link "Delete #{@triple.name}"
 

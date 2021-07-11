@@ -25,6 +25,8 @@ RSpec.describe "national parks trails index page" do
         expect(page).to have_content("Loop?: #{trail.is_loop}")
         expect(page).to have_content("Created At: #{trail.created_at}")
         expect(page).to have_content("Updated At: #{trail.updated_at}")
+        expect(page).to have_link("Update #{trail.name}")
+        expect(page).to have_link("Delete #{trail.name}")
       end
     end
   end
