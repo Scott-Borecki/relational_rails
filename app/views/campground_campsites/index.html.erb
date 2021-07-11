@@ -12,6 +12,13 @@
   <%= button_to "Edit #{campsite.name}", "/campsites/#{campsite.id}/edit", method: :get %>
 <% end %>
 
+<%= form_with url: "/campgrounds/#{@campground.id}/campsites?amount=#{@num.to_i}", method: :get, local: true do |form| %>
+  <%= form.label :amount %>
+  <%= @num = form.text_field :amount %>
+
+  <%= form.submit 'Submit' %>
+<% end %>
+
 <%= link_to 'Sort by Name', "/campgrounds/#{@campground.id}/campsites?sort=asc", method: :get %>
 
 <a href="/campgrounds/<%= @campground.id %>">Campground Details</a><br>

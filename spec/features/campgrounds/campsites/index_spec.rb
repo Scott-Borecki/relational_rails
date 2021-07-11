@@ -65,4 +65,23 @@ RSpec.describe 'campground campsites index' do
     click_link 'Trail Index'
     expect(current_path).to eq('/trails')
   end
+
+  it 'can link to sort campsites by name' do
+    visit "/campgrounds/#{@cherry_creek.id}/campsites"
+    click_link 'Sort by Name'
+    expect(current_path).to eq("/campgrounds/#{@cherry_creek.id}/campsites")
+    expect(@abilene_10.name).to appear_before(@cottonwood_111.name)
+  end
+
+  it 'can view records by over a given threshold' do
+    visit "/campgrounds/#{@cherry_creek.id}/campsites"
+    expect(page).to have_content(@cottonwood_111.name)
+
+    fill_in(:amount, with: 30)
+    click_button 'Submit'
+
+    expect(current_path).to eq("/campgrounds/#{@cherry_creek.id}/campsites")
+    expect(page).to have_content(@abilene_10.name)
+    expect(page).to_not have_content(@cottonwood_111.name)
+  end
 end
