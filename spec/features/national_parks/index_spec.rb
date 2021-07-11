@@ -1,45 +1,68 @@
 require 'rails_helper'
 
 RSpec.describe "national parks index page" do
-  before :each do
-    @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
-    @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
-    @kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
-
-    @triple = @denali.trails.create!(name: 'Triple Lakes Trail', length: 9, is_loop: false)
-    @quadruple = @denali.trails.create!(name: 'Quadruple Lakes Trail', length: 12, is_loop: false)
-    @double = @katmai.trails.create!(name: 'Double Lakes Trail', length: 6, is_loop: true)
-    @single = @kenai_fjords.trails.create!(name: 'Single Lake Trail', length: 3, is_loop: true)
-  end
-
-  it 'can display index page' do
-    @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
-    @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
-    @kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
+it 'can display index page' do
+    denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
+    katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
+    kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
 
     visit '/national_parks'
 
-    expect(page).to have_content(@denali.name)
-    expect(page).to have_content(@katmai.name)
-    expect(page).to have_content(@kenai_fjords.name)
+    expect(page).to have_content(denali.name)
+    expect(page).to have_content(katmai.name)
+    expect(page).to have_content(kenai_fjords.name)
   end
 
   it 'can display national parks sorted by most recently created' do
-    @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
+    denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
     sleep(1)
-    @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
+    katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
     sleep(1)
-    @kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
+    kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
 
     visit '/national_parks'
 
-    expect(page).to have_content("Created At: #{@denali.created_at}")
-    expect(page).to have_content("Created At: #{@katmai.created_at}")
-    expect(page).to have_content("Created At: #{@kenai_fjords.created_at}")
+    expect(page).to have_content("Created At: #{denali.created_at}")
+    expect(page).to have_content("Created At: #{katmai.created_at}")
+    expect(page).to have_content("Created At: #{kenai_fjords.created_at}")
 
-    expect(@kenai_fjords.name).to appear_before(@denali.name)
-    expect(@kenai_fjords.name).to appear_before(@katmai.name)
-    expect(@katmai.name).to appear_before(@denali.name)
+    expect(kenai_fjords.name).to appear_before(denali.name)
+    expect(kenai_fjords.name).to appear_before(katmai.name)
+    expect(katmai.name).to appear_before(denali.name)
+  end
+
+  it 'can link to the national park edit page' do
+    denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
+    katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
+    kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
+
+    visit '/national_parks'
+
+    expect(page).to have_link("Update Kenai Fjords")
+    expect(page).to have_link("Update Katmai")
+    expect(page).to have_link("Update Denali")
+
+    click_link "Update Kenai Fjords"
+
+    expect(current_path).to eq("/national_parks/#{kenai_fjords.id}/edit")
+  end
+
+  it 'can click link to the national park edit page' do
+    denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
+    katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
+    kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
+
+    visit '/national_parks'
+    click_link "Update Kenai Fjords"
+    expect(current_path).to eq("/national_parks/#{kenai_fjords.id}/edit")
+
+    visit '/national_parks'
+    click_link "Update Katmai"
+    expect(current_path).to eq("/national_parks/#{katmai.id}/edit")
+
+    visit '/national_parks'
+    click_link "Update Denali"
+    expect(current_path).to eq("/national_parks/#{denali.id}/edit")
   end
 
   it 'can link to trail index' do
