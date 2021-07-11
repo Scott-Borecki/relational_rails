@@ -26,6 +26,7 @@ class NationalParksController < ApplicationController
   end
 
   private
+  
   def national_park_params
     params.permit(:name, :acreage, :is_seasonal)
   end
