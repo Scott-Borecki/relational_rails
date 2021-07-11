@@ -23,7 +23,7 @@ RSpec.describe 'trails edit page' do
 
     fill_in('Name', with: 'Triple Lakes Trail')
     fill_in('Length', with: '9')
-    fill_in('Is loop', with: 'true')
+    check('Is loop')
     select('Denali', :from => 'national_park_id')
     click_button('Update Trail')
 

@@ -9,12 +9,12 @@ RSpec.describe 'the national parks new page' do
     expect(current_path).to eq('/national_parks/new')
   end
 
-  it 'can create a new artist' do
+  it 'can create a new national park' do
     visit '/national_parks/new'
 
     fill_in('Name', with: 'Denali')
     fill_in('Acreage', with: '900')
-    fill_in('Is seasonal', with: 'true')
+    check('Is seasonal')
     click_button('Create National Park')
 
     expect(current_path).to eq("/national_parks")

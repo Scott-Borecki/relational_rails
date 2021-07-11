@@ -4,6 +4,6 @@
   <%= form.label :acreage %>
   <%= form.text_field :acreage %>
   <%= form.label :is_seasonal %>
-  <%= form.text_field :is_seasonal %>
+  <%= form.check_box :is_seasonal, {}, 'true', 'false' %>
   <%= form.submit 'Update National Park' %>
 <% end %>
