@@ -7,14 +7,6 @@ class TrailsController < ApplicationController
     @trail = Trail.find(params[:id])
   end
 
-  def new
-  end
-
-  def create
-    Trail.create(trail_params)
-    redirect_to '/trails'
-  end
-
   def edit
     @trail = Trail.find(params[:id])
   end
@@ -26,6 +18,7 @@ class TrailsController < ApplicationController
   end
 
   private
+  
   def trail_params
     params.permit(:name, :length, :is_loop, :national_park_id)
   end
