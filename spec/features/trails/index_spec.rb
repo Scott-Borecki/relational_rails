@@ -33,6 +33,16 @@ RSpec.describe "trails index page" do
     expect(page).to_not have_content(@quadruple.name)
   end
 
+  it 'can link to the trails edit page' do
+    visit '/trails'
+    click_link "Update Double Lakes Trail"
+    expect(current_path).to eq("/trails/#{@double.id}/edit")
+
+    visit '/trails'
+    click_link "Update Single Lake Trail"
+    expect(current_path).to eq("/trails/#{@single.id}/edit")
+  end
+
   it 'can link to trail index' do
     visit "/trails"
     click_link 'Trail Index'

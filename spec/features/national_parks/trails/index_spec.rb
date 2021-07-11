@@ -44,6 +44,16 @@ RSpec.describe "national parks index page" do
     expect(page).to have_content("Updated At: #{@single.updated_at}")
   end
 
+  it 'can link to the trails edit page' do
+    visit "/national_parks/#{@denali.id}/trails"
+    click_link "Update Triple Lakes Trail"
+    expect(current_path).to eq("/trails/#{@triple.id}/edit")
+
+    visit "/national_parks/#{@denali.id}/trails"
+    click_link "Update Quadruple Lakes Trail"
+    expect(current_path).to eq("/trails/#{@quadruple.id}/edit")
+  end
+
   it 'can link to sort trails alphabetically by name' do
     visit "/national_parks/#{@denali.id}/trails"
 

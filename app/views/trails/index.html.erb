@@ -7,5 +7,6 @@
   <p>National Park: <%= NationalPark.find(trail.national_park_id).name %></p>
   <p>Created At: <%= trail.created_at %></p>
   <p>Updated At: <%= trail.updated_at %></p>
+  <p><%= link_to "Update #{trail.name}", "/trails/#{trail.id}/edit" %></p>
   <br>
 <% end %>

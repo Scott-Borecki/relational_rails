@@ -6,6 +6,7 @@
   <p>Loop?: <%= trail.is_loop %></p>
   <p>Created At: <%= trail.created_at %></p>
   <p>Updated At: <%= trail.updated_at %></p>
+  <p><%= link_to "Update #{trail.name}", "/trails/#{trail.id}/edit" %></p>
   <br>
 <% end %>
 
