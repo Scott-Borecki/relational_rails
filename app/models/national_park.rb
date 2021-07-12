@@ -20,6 +20,6 @@ class NationalPark < ApplicationRecord
   end
 
   def filter_by_length_greater_than(length)
-    trails.where("length > #{length}")
+    trails.where('length > ?', length)
   end
 end
