@@ -9,4 +9,4 @@
 <p><%= link_to "Delete #{@national_park.name}", "/national_parks/#{@national_park.id}", method: :delete %></p>
 <br>
 
-<a href="/national_parks/<%= @national_park.id %>/trails">Trails Index in National Park</a>
+<%= link_to 'Trails Index in National Park', "/national_parks/#{@national_park.id}/trails"%>

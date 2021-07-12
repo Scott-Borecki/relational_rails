@@ -1,6 +1,6 @@
 class NationalParksController < ApplicationController
   def index
-    if params[:sort] == "most_trails"
+    if params[:sort] == 'most_trails'
       @national_parks = NationalPark.order_by_most_trails
     else
       @national_parks = NationalPark.order_by_most_recent
@@ -32,7 +32,7 @@ class NationalParksController < ApplicationController
   def destroy
     national_park = NationalPark.find(params[:id])
     national_park.destroy
-    redirect_to "/national_parks"
+    redirect_to '/national_parks'
   end
 
   private

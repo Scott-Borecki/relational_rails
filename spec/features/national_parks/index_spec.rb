@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "national parks index page" do
-  describe "index page tests without sleep" do
+RSpec.describe 'national parks index page' do
+  describe 'index page tests without sleep' do
     before :each do
       @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
       @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
@@ -36,18 +36,18 @@ RSpec.describe "national parks index page" do
     it 'can link to the new national park page' do
       visit '/national_parks'
 
-      click_link "New National Park"
+      click_link 'New National Park'
 
       expect(current_path).to eq('/national_parks/new')
     end
 
     it 'can link to the index pages' do
-      pages = [["Trail Index", "/trails"],
-               ["National Park Index", "/national_parks"],
-               ["Campground Index", "/campgrounds"],
-               ["Campsite Index", "/campsites"]]
+      pages = [['Trail Index', '/trails'],
+               ['National Park Index', '/national_parks'],
+               ['Campground Index', '/campgrounds'],
+               ['Campsite Index', '/campsites']]
       pages.each do |link_text, path|
-        visit "/national_parks"
+        visit '/national_parks'
         click_link "#{link_text}"
         expect(current_path).to eq("#{path}")
       end
@@ -56,7 +56,7 @@ RSpec.describe "national parks index page" do
     it 'can sort national parks by number of trails' do
       visit '/national_parks'
 
-      click_link "Sort By Number of Trails"
+      click_link 'Sort By Number of Trails'
 
       expect(current_path).to eq('/national_parks')
       expect(@denali.name).to appear_before(@katmai.name)

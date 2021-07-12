@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "trails index page" do
+RSpec.describe 'trails index page' do
   before :each do
     @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
     @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
@@ -41,12 +41,12 @@ RSpec.describe "trails index page" do
   end
 
   it 'can link to the index pages' do
-    pages = [["Trail Index", "/trails"],
-             ["National Park Index", "/national_parks"],
-             ["Campground Index", "/campgrounds"],
-             ["Campsite Index", "/campsites"]]
+    pages = [['Trail Index', '/trails'],
+             ['National Park Index', '/national_parks'],
+             ['Campground Index', '/campgrounds'],
+             ['Campsite Index', '/campsites']]
     pages.each do |link_text, path|
-      visit "/trails"
+      visit '/trails'
       click_link "#{link_text}"
       expect(current_path).to eq("#{path}")
     end

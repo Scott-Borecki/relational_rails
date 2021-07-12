@@ -16,7 +16,7 @@ RSpec.describe 'national parks edit page' do
   it 'can update a national park record' do
     visit '/national_parks'
 
-    expect(page).to have_content("Denal")
+    expect(page).to have_content('Denal')
 
     visit "/national_parks/#{@denali.id}/edit"
 
@@ -30,10 +30,10 @@ RSpec.describe 'national parks edit page' do
   end
 
   it 'can link to the index pages' do
-    pages = [["Trail Index", "/trails"],
-             ["National Park Index", "/national_parks"],
-             ["Campground Index", "/campgrounds"],
-             ["Campsite Index", "/campsites"]]
+    pages = [['Trail Index', '/trails'],
+             ['National Park Index', '/national_parks'],
+             ['Campground Index', '/campgrounds'],
+             ['Campsite Index', '/campsites']]
     pages.each do |link_text, path|
       visit "/national_parks/#{@denali.id}/edit"
       click_link "#{link_text}"

@@ -17,7 +17,7 @@ RSpec.describe 'trails edit page' do
   it 'can update a trail record' do
     visit '/trails'
 
-    expect(page).to have_content("Tripl Lakes Trail")
+    expect(page).to have_content('Tripl Lakes Trail')
 
     visit "/trails/#{@triple.id}/edit"
 
@@ -32,10 +32,10 @@ RSpec.describe 'trails edit page' do
   end
 
   it 'can link to the index pages' do
-    pages = [["Trail Index", "/trails"],
-             ["National Park Index", "/national_parks"],
-             ["Campground Index", "/campgrounds"],
-             ["Campsite Index", "/campsites"]]
+    pages = [['Trail Index', '/trails'],
+             ['National Park Index', '/national_parks'],
+             ['Campground Index', '/campgrounds'],
+             ['Campsite Index', '/campsites']]
     pages.each do |link_text, path|
       visit "/trails/#{@triple.id}/edit"
       click_link "#{link_text}"

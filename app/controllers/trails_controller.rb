@@ -20,7 +20,7 @@ class TrailsController < ApplicationController
   def destroy
     trail = Trail.find(params[:id])
     trail.destroy
-    redirect_to "/trails"
+    redirect_to '/trails'
   end
 
   private

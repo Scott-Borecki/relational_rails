@@ -17,15 +17,15 @@ RSpec.describe 'the national parks new page' do
     check('Is seasonal')
     click_button('Create National Park')
 
-    expect(current_path).to eq("/national_parks")
-    expect(page).to have_content("Denali")
+    expect(current_path).to eq('/national_parks')
+    expect(page).to have_content('Denali')
   end
 
   it 'can link to the index pages' do
-    pages = [["Trail Index", "/trails"],
-             ["National Park Index", "/national_parks"],
-             ["Campground Index", "/campgrounds"],
-             ["Campsite Index", "/campsites"]]
+    pages = [['Trail Index', '/trails'],
+             ['National Park Index', '/national_parks'],
+             ['Campground Index', '/campgrounds'],
+             ['Campsite Index', '/campsites']]
     pages.each do |link_text, path|
       visit '/national_parks/new'
       click_link "#{link_text}"

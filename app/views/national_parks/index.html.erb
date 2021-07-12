@@ -2,11 +2,11 @@
 
 <% @national_parks.each do |national_park| %>
   <p>
-    <a href="/national_parks/<%= national_park.id %>"><%= national_park.name %></a>
+    <%= link_to "#{national_park.name}", "/national_parks/#{national_park.id}" %>
     (Created At: <%= national_park.created_at %>)
     <%= link_to "Update #{national_park.name}", "/national_parks/#{national_park.id}/edit" %>
   </p>
 <% end %>
 
-<p><%= link_to "New National Park", "/national_parks/new" %></p>
-<p><%= link_to "Sort By Number of Trails", "/national_parks?sort=most_trails" %></p>
+<p><%= link_to 'New National Park', '/national_parks/new' %></p>
+<p><%= link_to 'Sort By Number of Trails', '/national_parks?sort=most_trails' %></p>

@@ -9,11 +9,11 @@ RSpec.describe 'trail destroy page' do
   end
 
   it 'can delete record of trail from trails index' do
-    visit "/trails"
+    visit '/trails'
 
     click_link "Delete #{@triple.name}"
 
-    expect(current_path).to eq("/trails")
+    expect(current_path).to eq('/trails')
     expect(page).to_not have_content('Triple Lakes Trail')
     expect(page).to have_content('Quadruple Lakes Trail')
   end
@@ -23,7 +23,7 @@ RSpec.describe 'trail destroy page' do
 
     click_link "Delete #{@triple.name}"
 
-    expect(current_path).to eq("/trails")
+    expect(current_path).to eq('/trails')
     expect(page).to_not have_content('Triple Lakes Trail')
     expect(page).to have_content('Quadruple Lakes Trail')
   end
