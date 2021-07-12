@@ -1,13 +1,14 @@
 <h1><%= @campground.name %></h1>
 
 <p>
-  Created at: <%= @campground.created_at%><br>
-  Updated at: <%= @campground.updated_at %><br>
   Reservations Allowed: <%= @campground.reservation_allowed %><br>
-  Max Nights Stay: <%= @campground.max_nights %>
-  Number of Campsites: <%= @campground.campsite_count %>
+  Max Nights Stay: <%= @campground.max_nights %><br>
+  Number of Campsites: <%= @campground.campsite_count %><br>
+  Created at: <%= @campground.created_at%><br>
+  Updated at: <%= @campground.updated_at %>
 </p>
 
-<a href="/campgrounds/<%= @campground.id %>/campsites">Campsites at Campground</a><br>
-<%= link_to "Update #{@campground.name}", "/campgrounds/#{@campground.id}/edit" %>
-<%= button_to "Delete", "/campgrounds/#{@campground.id}", method: :delete %>
+<%= button_to 'Edit', "/campgrounds/#{@campground.id}/edit" %>
+<%= button_to 'Delete', "/campgrounds/#{@campground.id}", method: :delete %><br>
+
+<%= link_to 'Campsites at Campground', "/campgrounds/#{@campground.id}/campsites", method: :get %>
