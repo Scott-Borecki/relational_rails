@@ -4,7 +4,8 @@
   <p>
     <%= link_to "#{national_park.name}", "/national_parks/#{national_park.id}" %>
     (Created At: <%= national_park.created_at %>)
-    <%= link_to "Update #{national_park.name}", "/national_parks/#{national_park.id}/edit" %>
+    <%= button_to "Edit #{national_park.name}", "/national_parks/#{national_park.id}/edit", method: :get %>
+    <%= button_to "Delete #{national_park.name}", "/national_parks/#{national_park.id}", method: :delete %>
   </p>
 <% end %>
 

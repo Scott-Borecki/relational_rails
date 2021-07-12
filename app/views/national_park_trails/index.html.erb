@@ -2,12 +2,12 @@
 
 <% @trails.each do |trail| %>
   <h3><%= link_to "#{trail.name}", "/trails/#{trail.id}" %></h3>
-  <p>Length: <%= trail.length %> miles</p>
+  <%= button_to "Edit #{trail.name}", "/trails/#{trail.id}/edit", method: :get %>
+  <%= button_to "Delete #{trail.name}", "/trails/#{trail.id}", method: :delete %>
+  <p>Created at: <%= trail.created_at %></p>
+  <p>Updated at: <%= trail.updated_at %></p>
   <p>Loop?: <%= trail.is_loop %></p>
-  <p>Created At: <%= trail.created_at %></p>
-  <p>Updated At: <%= trail.updated_at %></p>
-  <p><%= link_to "Update #{trail.name}", "/trails/#{trail.id}/edit" %></p>
-  <p><%= link_to "Delete #{trail.name}", "/trails/#{trail.id}", method: :delete %></p>
+  <p>Length: <%= trail.length %> miles</p>
   <br>
 <% end %>
 

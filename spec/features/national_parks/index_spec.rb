@@ -22,13 +22,15 @@ RSpec.describe 'national parks index page' do
 
       @parks.each do |park|
         expect(page).to have_content(park.name)
+        expect(page).to have_button("Edit #{park.name}")
+        expect(page).to have_button("Delete #{park.name}")
       end
     end
 
     it 'can link to the national park edit page' do
       @parks.each do |park|
         visit '/national_parks'
-        click_link "Update #{park.name}"
+        click_button "Edit #{park.name}"
         expect(current_path).to eq("/national_parks/#{park.id}/edit")
       end
     end

@@ -8,7 +8,7 @@ RSpec.describe 'national parks edit page' do
   it 'can link to the national park edit page' do
     visit "/national_parks/#{@denali.id}"
 
-    click_link "Update #{@denali.name}"
+    click_button 'Edit'
 
     expect(current_path).to eq("/national_parks/#{@denali.id}/edit")
   end

@@ -21,12 +21,12 @@ RSpec.describe 'national parks trails index page' do
         visit "/national_parks/#{park.id}/trails"
 
         expect(page).to have_content(trail.name)
-        expect(page).to have_content("Length: #{trail.length} miles")
+        expect(page).to have_button("Edit #{trail.name}")
+        expect(page).to have_button("Delete #{trail.name}")
+        expect(page).to have_content("Created at: #{trail.created_at}")
+        expect(page).to have_content("Updated at: #{trail.updated_at}")
         expect(page).to have_content("Loop?: #{trail.is_loop}")
-        expect(page).to have_content("Created At: #{trail.created_at}")
-        expect(page).to have_content("Updated At: #{trail.updated_at}")
-        expect(page).to have_link("Update #{trail.name}")
-        expect(page).to have_link("Delete #{trail.name}")
+        expect(page).to have_content("Length: #{trail.length} miles")
       end
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe 'national parks trails index page' do
     @park_trails.each do |park, trails|
       trails.each do |trail|
         visit "/national_parks/#{park.id}/trails"
-        click_link "Update #{trail.name}"
+        click_button "Edit #{trail.name}"
         expect(current_path).to eq("/trails/#{trail.id}/edit")
       end
     end

@@ -19,13 +19,13 @@ RSpec.describe 'trails index page' do
 
     @trails.each do |trail|
       expect(page).to have_content(trail.name)
-      expect(page).to have_content("Length: #{trail.length}")
-      expect(page).to have_content("Loop?: #{trail.is_loop}")
+      expect(page).to have_button("Edit #{trail.name}")
+      expect(page).to have_button("Delete #{trail.name}")
       expect(page).to have_content("National Park: #{NationalPark.find(trail.national_park_id).name}")
       expect(page).to have_content("Created At: #{trail.created_at}")
       expect(page).to have_content("Updated At: #{trail.updated_at}")
-      expect(page).to have_link("Update #{trail.name}")
-      expect(page).to have_link("Delete #{trail.name}")
+      expect(page).to have_content("Loop?: #{trail.is_loop}")
+      expect(page).to have_content("Length: #{trail.length}")
     end
 
     expect(page).to_not have_content(@triple.name)
@@ -35,7 +35,7 @@ RSpec.describe 'trails index page' do
   it 'can link to the trails edit page' do
     @trails.each do |trail|
       visit '/trails'
-      click_link "Update #{trail.name}"
+      click_button "Edit #{trail.name}"
       expect(current_path).to eq("/trails/#{trail.id}/edit")
     end
   end
