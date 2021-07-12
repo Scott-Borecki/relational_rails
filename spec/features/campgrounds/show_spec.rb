@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'campground show page' do
   before :each do
-    @sunset_point = Campground.create!(name: "Sunset Point Campground", reservation_allowed: false, max_nights: 7)
-    @cherry_creek = Campground.create!(name: "Cherry Creek Campground", reservation_allowed: true, max_nights: 14)
+    @sunset_point = Campground.create!(name: 'Sunset Point Campgroun', reservation_allowed: false, max_nights: 7)
+    @cherry_creek = Campground.create!(name: 'Cherry Creek Campground', reservation_allowed: true, max_nights: 14)
   end
 
   it "shows a campground's name and details" do
