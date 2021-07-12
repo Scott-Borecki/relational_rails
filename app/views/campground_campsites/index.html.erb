@@ -12,7 +12,7 @@
   <%= button_to "Edit #{campsite.name}", "/campsites/#{campsite.id}/edit", method: :get %>
 <% end %>
 
-<%= form_with url: "/campgrounds/#{@campground.id}/campsites?amount=#{@num.to_i}", method: :get, local: true do |form| %>
+<%= form_with url: "/campgrounds/#{@campground.id}/campsites?amount=#{@num}", method: :get, local: true do |form| %>
   <%= form.label :amount %>
   <%= @num = form.text_field :amount %>
 
