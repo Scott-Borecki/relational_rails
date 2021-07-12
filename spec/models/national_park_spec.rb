@@ -47,5 +47,11 @@ describe NationalPark, type: :model do
         expect(@denali.sort_by_name).to eq([berry, deer, @quadruple, @triple])
       end
     end
+
+    describe '#filter_by_length_greater_than' do
+      it 'can return the trails of the national park with more than a given length' do
+        expect(@denali.filter_by_length_greater_than(10)).to eq([@quadruple])
+      end
+    end
   end
 end

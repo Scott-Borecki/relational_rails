@@ -18,4 +18,8 @@ class NationalPark < ApplicationRecord
   def sort_by_name
     trails.order(name: :asc)
   end
+
+  def filter_by_length_greater_than(length)
+    trails.where("length > #{length}")
+  end
 end

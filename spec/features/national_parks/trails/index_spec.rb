@@ -50,6 +50,17 @@ RSpec.describe "national parks trails index page" do
     expect(@quadruple.name).to appear_before(@triple.name)
   end
 
+  it 'can return trails with more than a specified length' do
+    visit "/national_parks/#{@denali.id}/trails"
+
+    fill_in('Length', with: '10')
+    click_button "Only return trails with more than this length"
+
+    expect(current_path).to eq("/national_parks/#{@denali.id}/trails")
+    expect(page).to have_content("#{@quadruple.name}")
+    expect(page).to_not have_content("#{@triple.name}")
+  end
+
   it 'can link to the index pages' do
     pages = [["Trail Index", "/trails"],
              ["National Park Index", "/national_parks"],

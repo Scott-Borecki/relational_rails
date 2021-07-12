@@ -12,5 +12,10 @@
 <% end %>
 
 <%= link_to 'Create Trail', "/national_parks/#{@national_park.id}/trails/new" %>
-
 <%= link_to 'Sort Trails By Name', "/national_parks/#{@national_park.id}/trails?sort=name_asc" %>
+
+<%= form_with url: "/national_parks/#{@national_park.id}/trails?length=#{@length}", method: 'get', local: true do |form| %>
+  <%= form.label :length, "Length:" %>
+  <%= @length = form.text_field :length %>
+  <%= form.submit "Only return trails with more than this length" %>
+<% end %>
