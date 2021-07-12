@@ -1,3 +1,5 @@
+<h2>New Trail</h2>
+
 <%= form_with url: "/national_parks/#{@national_park.id}/trails", method: :post, local: true do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
