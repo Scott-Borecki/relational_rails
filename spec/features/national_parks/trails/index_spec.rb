@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "national parks show_trails page" do
+RSpec.describe 'national parks trails index page' do
   before :each do
     @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
     @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
@@ -10,93 +10,68 @@ RSpec.describe "national parks show_trails page" do
     @quadruple = @denali.trails.create!(name: 'Quadruple Lakes Trail', length: 12, is_loop: false)
     @double = @katmai.trails.create!(name: 'Double Lakes Trail', length: 6, is_loop: true)
     @single = @kenai_fjords.trails.create!(name: 'Single Lake Trail', length: 3, is_loop: true)
+
+    @parks = [@denali, @katmai, @kenai_fjords]
+    @park_trails = [[@denali, [@triple, @quadruple]], [@katmai, [@double]], [@kenai_fjords, [@single]]]
   end
 
   it 'can display all of the trails at the national park' do
-    visit "/national_parks/#{@denali.id}/trails"
+    @park_trails.each do |park, trails|
+      trails.each do |trail|
+        visit "/national_parks/#{park.id}/trails"
 
-    expect(page).to have_content(@quadruple.name)
-    expect(page).to have_content("Length: #{@quadruple.length} miles")
-    expect(page).to have_content("Loop?: #{@quadruple.is_loop}")
-    expect(page).to have_content("Created At: #{@quadruple.created_at}")
-    expect(page).to have_content("Updated At: #{@quadruple.updated_at}")
-
-    expect(page).to have_content(@triple.name)
-    expect(page).to have_content("Length: #{@triple.length} miles")
-    expect(page).to have_content("Loop?: #{@triple.is_loop}")
-    expect(page).to have_content("Created At: #{@triple.created_at}")
-    expect(page).to have_content("Updated At: #{@triple.updated_at}")
-
-    visit "/national_parks/#{@katmai.id}/trails"
-
-    expect(page).to have_content(@double.name)
-    expect(page).to have_content("Length: #{@double.length} miles")
-    expect(page).to have_content("Loop?: #{@double.is_loop}")
-    expect(page).to have_content("Created At: #{@double.created_at}")
-    expect(page).to have_content("Updated At: #{@double.updated_at}")
-
-    visit "/national_parks/#{@kenai_fjords.id}/trails"
-
-    expect(page).to have_content(@single.name)
-    expect(page).to have_content("Length: #{@single.length} miles")
-    expect(page).to have_content("Loop?: #{@single.is_loop}")
-    expect(page).to have_content("Created At: #{@single.created_at}")
-    expect(page).to have_content("Updated At: #{@single.updated_at}")
+        expect(page).to have_content(trail.name)
+        expect(page).to have_content("Length: #{trail.length} miles")
+        expect(page).to have_content("Loop?: #{trail.is_loop}")
+        expect(page).to have_content("Created At: #{trail.created_at}")
+        expect(page).to have_content("Updated At: #{trail.updated_at}")
+        expect(page).to have_link("Update #{trail.name}")
+        expect(page).to have_link("Delete #{trail.name}")
+      end
+    end
   end
 
-  it 'can link to trail index' do
-    visit "/national_parks/#{@denali.id}/trails"
-    click_link 'Trail Index'
-    expect(current_path).to eq('/trails')
-
-    visit "/national_parks/#{@katmai.id}/trails"
-    click_link 'Trail Index'
-    expect(current_path).to eq('/trails')
-
-    visit "/national_parks/#{@kenai_fjords.id}/trails"
-    click_link 'Trail Index'
-    expect(current_path).to eq('/trails')
+  it 'can link to the trails edit page' do
+    @park_trails.each do |park, trails|
+      trails.each do |trail|
+        visit "/national_parks/#{park.id}/trails"
+        click_link "Update #{trail.name}"
+        expect(current_path).to eq("/trails/#{trail.id}/edit")
+      end
+    end
   end
 
-  it 'can link to national park index' do
+  it 'can link to sort trails alphabetically by name' do
     visit "/national_parks/#{@denali.id}/trails"
-    click_link 'National Park Index'
-    expect(current_path).to eq('/national_parks')
 
-    visit "/national_parks/#{@katmai.id}/trails"
-    click_link 'National Park Index'
-    expect(current_path).to eq('/national_parks')
+    click_link 'Sort Trails By Name'
 
-    visit "/national_parks/#{@kenai_fjords.id}/trails"
-    click_link 'National Park Index'
-    expect(current_path).to eq('/national_parks')
+    expect(current_path).to eq("/national_parks/#{@denali.id}/trails")
+    expect(@quadruple.name).to appear_before(@triple.name)
   end
 
-  it 'can link to campground index' do
+  it 'can return trails with more than a specified length' do
     visit "/national_parks/#{@denali.id}/trails"
-    click_link 'Campground Index'
-    expect(current_path).to eq('/campgrounds')
 
-    visit "/national_parks/#{@katmai.id}/trails"
-    click_link 'Campground Index'
-    expect(current_path).to eq('/campgrounds')
+    fill_in('Length', with: '10')
+    click_button 'Only return trails with more than this length'
 
-    visit "/national_parks/#{@kenai_fjords.id}/trails"
-    click_link 'Campground Index'
-    expect(current_path).to eq('/campgrounds')
+    expect(current_path).to eq("/national_parks/#{@denali.id}/trails")
+    expect(page).to have_content("#{@quadruple.name}")
+    expect(page).to_not have_content("#{@triple.name}")
   end
 
-  it 'can link to campsite index' do
-    visit "/national_parks/#{@denali.id}/trails"
-    click_link 'Campsite Index'
-    expect(current_path).to eq('/campsites')
-
-    visit "/national_parks/#{@katmai.id}/trails"
-    click_link 'Campsite Index'
-    expect(current_path).to eq('/campsites')
-
-    visit "/national_parks/#{@kenai_fjords.id}/trails"
-    click_link 'Campsite Index'
-    expect(current_path).to eq('/campsites')
+  it 'can link to the index pages' do
+    pages = [['Trail Index', '/trails'],
+             ['National Park Index', '/national_parks'],
+             ['Campground Index', '/campgrounds'],
+             ['Campsite Index', '/campsites']]
+    @parks.each do |park|
+      pages.each do |link_text, path|
+        visit "/national_parks/#{park.id}/trails"
+        click_link "#{link_text}"
+        expect(current_path).to eq("#{path}")
+      end
+    end
   end
 end

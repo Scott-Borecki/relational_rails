@@ -1,68 +1,88 @@
 require 'rails_helper'
 
-RSpec.describe "national parks index page" do
-  before :each do
-    @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
-    @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
-    @kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
+RSpec.describe 'national parks index page' do
+  describe 'index page tests without sleep' do
+    before :each do
+      @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
+      @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
+      @kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
 
-    @triple = @denali.trails.create!(name: 'Triple Lakes Trail', length: 9, is_loop: false)
-    @quadruple = @denali.trails.create!(name: 'Quadruple Lakes Trail', length: 12, is_loop: false)
-    @double = @katmai.trails.create!(name: 'Double Lakes Trail', length: 6, is_loop: true)
-    @single = @kenai_fjords.trails.create!(name: 'Single Lake Trail', length: 3, is_loop: true)
+      @single = @kenai_fjords.trails.create!(name: 'Single Lake Trail', length: 3, is_loop: true)
+      @double = @katmai.trails.create!(name: 'Double Lakes Trail', length: 6, is_loop: true)
+      @triple = @denali.trails.create!(name: 'Triple Lakes Trail', length: 9, is_loop: true)
+      @quadruple = @denali.trails.create!(name: 'Quadruple Lakes Trail', length: 12, is_loop: true)
+      @five = @kenai_fjords.trails.create!(name: 'Five Lakes Trail', length: 5, is_loop: true)
+      @single = @denali.trails.create!(name: 'Six Lakes Trail', length: 6, is_loop: true)
+
+      @parks = [@denali, @katmai, @kenai_fjords]
+    end
+
+    it 'can display index page' do
+      visit '/national_parks'
+
+      @parks.each do |park|
+        expect(page).to have_content(park.name)
+      end
+    end
+
+    it 'can link to the national park edit page' do
+      @parks.each do |park|
+        visit '/national_parks'
+        click_link "Update #{park.name}"
+        expect(current_path).to eq("/national_parks/#{park.id}/edit")
+      end
+    end
+
+    it 'can link to the new national park page' do
+      visit '/national_parks'
+
+      click_link 'New National Park'
+
+      expect(current_path).to eq('/national_parks/new')
+    end
+
+    it 'can link to the index pages' do
+      pages = [['Trail Index', '/trails'],
+               ['National Park Index', '/national_parks'],
+               ['Campground Index', '/campgrounds'],
+               ['Campsite Index', '/campsites']]
+      pages.each do |link_text, path|
+        visit '/national_parks'
+        click_link "#{link_text}"
+        expect(current_path).to eq("#{path}")
+      end
+    end
+
+    it 'can sort national parks by number of trails' do
+      visit '/national_parks'
+
+      click_link 'Sort By Number of Trails'
+
+      expect(current_path).to eq('/national_parks')
+      expect(@denali.name).to appear_before(@katmai.name)
+      expect(@denali.name).to appear_before(@kenai_fjords.name)
+      expect(@kenai_fjords.name).to appear_before(@katmai.name)
+    end
   end
 
-  it 'can display index page' do
-    @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
-    @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
-    @kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
+  describe 'index page tests with sleep' do
+    it 'can display national parks sorted by most recently created' do
+      denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
+      sleep(1)
+      katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
+      sleep(1)
+      kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
+      parks = [denali, katmai, kenai_fjords]
 
-    visit '/national_parks'
+      visit '/national_parks'
 
-    expect(page).to have_content(@denali.name)
-    expect(page).to have_content(@katmai.name)
-    expect(page).to have_content(@kenai_fjords.name)
-  end
+      parks.each do |park|
+        expect(page).to have_content("Created At: #{park.created_at}")
+      end
 
-  it 'can display national parks sorted by most recently created' do
-    @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
-    sleep(1)
-    @katmai = NationalPark.create!(name: 'Katmai', acreage: 4_093_077, is_seasonal: true)
-    sleep(1)
-    @kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: true)
-
-    visit '/national_parks'
-
-    expect(page).to have_content("Created At: #{@denali.created_at}")
-    expect(page).to have_content("Created At: #{@katmai.created_at}")
-    expect(page).to have_content("Created At: #{@kenai_fjords.created_at}")
-
-    expect(@kenai_fjords.name).to appear_before(@denali.name)
-    expect(@kenai_fjords.name).to appear_before(@katmai.name)
-    expect(@katmai.name).to appear_before(@denali.name)
-  end
-
-  it 'can link to trail index' do
-    visit "/national_parks"
-    click_link 'Trail Index'
-    expect(current_path).to eq('/trails')
-  end
-
-  it 'can link to national park index' do
-    visit "/national_parks"
-    click_link 'National Park Index'
-    expect(current_path).to eq('/national_parks')
-  end
-
-  it 'can link to campground index' do
-    visit "/national_parks"
-    click_link 'Campground Index'
-    expect(current_path).to eq('/campgrounds')
-  end
-
-  it 'can link to campsite index' do
-    visit "/national_parks"
-    click_link 'Campsite Index'
-    expect(current_path).to eq('/campsites')
+      expect(kenai_fjords.name).to appear_before(denali.name)
+      expect(kenai_fjords.name).to appear_before(katmai.name)
+      expect(katmai.name).to appear_before(denali.name)
+    end
   end
 end

@@ -1,10 +1,21 @@
 <h1>Trails at <%= @national_park.name %> National Park</h1>
 
 <% @trails.each do |trail| %>
-  <h3><a href="/trails/<%= trail.id %>"><%= trail.name %></a></h3>
+  <h3><%= link_to "#{trail.name}", "/trails/#{trail.id}" %></h3>
   <p>Length: <%= trail.length %> miles</p>
   <p>Loop?: <%= trail.is_loop %></p>
   <p>Created At: <%= trail.created_at %></p>
   <p>Updated At: <%= trail.updated_at %></p>
+  <p><%= link_to "Update #{trail.name}", "/trails/#{trail.id}/edit" %></p>
+  <p><%= link_to "Delete #{trail.name}", "/trails/#{trail.id}", method: :delete %></p>
   <br>
+<% end %>
+
+<%= link_to 'Create Trail', "/national_parks/#{@national_park.id}/trails/new" %>
+<%= link_to 'Sort Trails By Name', "/national_parks/#{@national_park.id}/trails?sort=name_asc" %>
+
+<%= form_with url: "/national_parks/#{@national_park.id}/trails?length=#{@length}", method: :get, local: true do |form| %>
+  <%= form.label :length, 'Length:' %>
+  <%= @length = form.text_field :length %>
+  <%= form.submit 'Only return trails with more than this length' %>
 <% end %>
