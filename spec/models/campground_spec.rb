@@ -28,5 +28,23 @@ RSpec.describe Campground do
         expect(@sunset_point.campsite_count).to eq(2)
       end
     end
+
+    describe '#order_campsites_by_name' do
+      it 'can order campsites by name' do
+        site_18 = @sunset_point.campsites.create!(name: "Site 18", tent_only: false, overnight_fee: 52)
+        site_15 = @sunset_point.campsites.create!(name: "Site 15", tent_only: true, overnight_fee: 26)
+
+        expect(@sunset_point.order_campsites_by_name).to eq([site_15, site_18])
+      end
+    end
+
+    describe '#overnight_fee_greater_than' do
+      it 'can return campsites with overnight fee greater than amount given' do
+        site_18 = @sunset_point.campsites.create!(name: "Site 18", tent_only: false, overnight_fee: 52)
+        site_15 = @sunset_point.campsites.create!(name: "Site 15", tent_only: true, overnight_fee: 26)
+
+        expect(@sunset_point.overnight_fee_greater_than(30)).to eq([site_18])
+      end
+    end
   end
 end

@@ -8,4 +8,6 @@
   Number of Campsites: <%= @campground.campsite_count %>
 </p>
 
-<a href="/campgrounds/<%= @campground.id %>/campsites">Campsites at Campground</a>
+<a href="/campgrounds/<%= @campground.id %>/campsites">Campsites at Campground</a><br>
+<%= link_to "Update #{@campground.name}", "/campgrounds/#{@campground.id}/edit" %>
+<%= button_to "Delete", "/campgrounds/#{@campground.id}", method: :delete %>

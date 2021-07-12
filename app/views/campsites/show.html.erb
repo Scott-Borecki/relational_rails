@@ -7,3 +7,6 @@
   <%= "Campsite is Tent Only: #{@campsite.tent_only}" %><br>
   <%= "Overnight Fee: #{@campsite.overnight_fee}" %>
 </p>
+
+<%= link_to "Update #{@campsite.name}", "/campsites/#{@campsite.id}/edit" %>
+<%= button_to "Delete", "/campsites/#{@campsite.id}", method: :delete %>

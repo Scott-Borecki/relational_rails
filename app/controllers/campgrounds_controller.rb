@@ -7,8 +7,34 @@ class CampgroundsController < ApplicationController
     @campground = Campground.find(params[:id])
   end
 
-  def index_campsites
-    show
-    @campsites = Campsite.where(campground_id: Campground.find(params[:id]))
+  def new
+  end
+
+  def create
+    @campground = Campground.create(campground_params)
+    redirect_to '/campgrounds'
+  end
+
+  def edit
+    @campground = Campground.find(params[:id])
+  end
+
+  def update
+    @campground = Campground.find(params[:id])
+    @campground.update(campground_params)
+    redirect_to "/campgrounds/#{@campground.id}"
+  end
+
+  def destroy
+    campground = Campground.find(params[:id])
+    campsites = campground.campsites
+    campsites.destroy_all
+    campground.destroy
+    redirect_to '/campgrounds'
+  end
+
+private
+  def campground_params
+    params.permit(:name, :reservation_allowed, :max_nights)
   end
 end

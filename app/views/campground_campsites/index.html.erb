@@ -1,0 +1,25 @@
+<h1>Campsites at <%= @campground.name %></h1>
+
+<% @campsites.each do |campsite| %>
+  <h3><a href="/campsites/<%= campsite.id %>"><%= campsite.name %></a></h3>
+  <p>
+    Campground: <%= Campground.find(campsite.campground_id).name %><br>
+    Created at: <%= campsite.created_at %><br>
+    Updated at: <%= campsite.updated_at %><br>
+    Campsite is Tent Only: <%= campsite.tent_only %><br>
+    Overnight Fee: <%= campsite.overnight_fee %>
+  </p>
+  <%= button_to "Edit #{campsite.name}", "/campsites/#{campsite.id}/edit", method: :get %>
+<% end %>
+
+<%= form_with url: "/campgrounds/#{@campground.id}/campsites?amount=#{@num}", method: :get, local: true do |form| %>
+  <%= form.label :amount %>
+  <%= @num = form.text_field :amount %>
+
+  <%= form.submit 'Submit' %>
+<% end %>
+
+<%= link_to 'Sort by Name', "/campgrounds/#{@campground.id}/campsites?sort=asc", method: :get %>
+
+<a href="/campgrounds/<%= @campground.id %>">Campground Details</a><br>
+<a href="/campgrounds/<%= @campground.id %>/campsites/new">Create Campsite</a><br>

@@ -4,5 +4,9 @@
   <h3>
     <a href="/campgrounds/<%= campground.id %>"><%= campground.name %></a>
     <%= campground.created_at %>
+    <%= button_to "Edit #{campground.name}", "/campgrounds/#{campground.id}/edit", method: :get %>
+    <%= button_to "Delete #{campground.name}", "/campgrounds/#{campground.id}", method: :delete %>
   </h3>
 <% end %>
+
+<a href="/campgrounds/new">New Campground</a>

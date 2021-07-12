@@ -7,7 +7,7 @@ RSpec.describe 'campground campsites index' do
     @chatfield = Campground.create!(name: "Chatfield Campground", reservation_allowed: true, max_nights: 14)
     @site_15 = @sunset_point.campsites.create!(name: "Site 15", tent_only: true, overnight_fee: 26)
     @site_18 = @sunset_point.campsites.create!(name: "Site 18", tent_only: false, overnight_fee: 52)
-    @cottonwood_111= @cherry_creek.campsites.create!(name: "Cottonweood Grove Site 111", tent_only: false, overnight_fee: 28)
+    @cottonwood_111= @cherry_creek.campsites.create!(name: "Cottonwood Grove Site 111", tent_only: false, overnight_fee: 28)
     @abilene_10= @cherry_creek.campsites.create!(name: "Abilene Site 10", tent_only: false, overnight_fee: 41)
     @a_001 = @chatfield.campsites.create!(name: "A Loop Site 1", tent_only: false, overnight_fee: 41)
     @group_a = @chatfield.campsites.create!(name: "Group Site A", tent_only: false, overnight_fee: 200)
@@ -64,5 +64,24 @@ RSpec.describe 'campground campsites index' do
     visit "/campgrounds/#{@sunset_point.id}/campsites"
     click_link 'Trail Index'
     expect(current_path).to eq('/trails')
+  end
+
+  it 'can link to sort campsites by name' do
+    visit "/campgrounds/#{@cherry_creek.id}/campsites"
+    click_link 'Sort by Name'
+    expect(current_path).to eq("/campgrounds/#{@cherry_creek.id}/campsites")
+    expect(@abilene_10.name).to appear_before(@cottonwood_111.name)
+  end
+
+  it 'can view records by over a given threshold' do
+    visit "/campgrounds/#{@cherry_creek.id}/campsites"
+    expect(page).to have_content(@cottonwood_111.name)
+
+    fill_in(:amount, with: 30)
+    click_button 'Submit'
+
+    expect(current_path).to eq("/campgrounds/#{@cherry_creek.id}/campsites")
+    expect(page).to have_content(@abilene_10.name)
+    expect(page).to_not have_content(@cottonwood_111.name)
   end
 end
