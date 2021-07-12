@@ -1,11 +1,15 @@
 <%= form_with url: "/trails/#{@trail.id}", methods: :patch, local: true do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
+
   <%= form.label :length %>
   <%= form.text_field :length %>
+
   <%= form.label :is_loop %>
   <%= form.check_box :is_loop, {}, 'true', 'false' %>
+
   <%= form.label :national_park_id %>
   <%= form.collection_select :national_park_id, NationalPark.all, :id, :name %>
+
   <%= form.submit 'Update Trail' %>
 <% end %>

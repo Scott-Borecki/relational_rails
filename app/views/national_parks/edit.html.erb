@@ -1,9 +1,12 @@
 <%= form_with url: "/national_parks/#{@national_park.id}", methods: :patch, local: true do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
+
   <%= form.label :acreage %>
   <%= form.text_field :acreage %>
+
   <%= form.label :is_seasonal %>
   <%= form.check_box :is_seasonal, {}, 'true', 'false' %>
+
   <%= form.submit 'Update National Park' %>
 <% end %>
