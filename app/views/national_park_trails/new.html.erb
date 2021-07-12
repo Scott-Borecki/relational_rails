@@ -1,0 +1,14 @@
+<%= form_with url: "/national_parks/#{@national_park.id}/trails", method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :length %>
+  <%= form.text_field :length %>
+
+  <%= form.label :is_loop %>
+  <%= form.check_box :is_loop, {}, 'true', 'false' %>
+
+  <%= form.hidden_field :national_park_id, value: "#{@national_park.id}" %>
+
+  <%= form.submit 'Create Trail' %>
+<% end %>
