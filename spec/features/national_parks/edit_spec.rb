@@ -20,9 +20,9 @@ RSpec.describe 'national parks edit page' do
 
     visit "/national_parks/#{@denali.id}/edit"
 
-    fill_in('Name', with: 'Denali')
-    fill_in('Acreage', with: '900')
-    check('Is seasonal')
+    fill_in('Name:', with: 'Denali')
+    fill_in('Acres:', with: '900')
+    check('Seasonal:')
     click_button('Update National Park')
 
     expect(current_path).to eq("/national_parks/#{@denali.id}")

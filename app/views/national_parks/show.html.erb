@@ -1,11 +1,14 @@
 <h1><%= @national_park.name %></h1>
-<%= button_to 'Edit', "/national_parks/#{@national_park.id}/edit", method: :get %>
-<%= button_to 'Delete', "/national_parks/#{@national_park.id}", method: :delete %>
-<p>Number of Trails: <%= @national_park.trail_count %></p>
-<p>Created At: <%= @national_park.created_at %></p>
-<p>Updated At: <%= @national_park.updated_at %></p>
-<p>Seasonal?: <%= @national_park.is_seasonal %></p>
-<p>Acreage: <%= @national_park.acreage %> acres</p>
-<br>
 
-<%= link_to 'Trails Index in National Park', "/national_parks/#{@national_park.id}/trails"%>
+<p>
+  Seasonal?: <%= @national_park.is_seasonal %><br>
+  Acreage: <%= @national_park.acreage %> acres<br>
+  Number of Trails: <%= @national_park.trail_count %><br>
+  Created at: <%= @national_park.created_at %><br>
+  Updated at: <%= @national_park.updated_at %><br>
+</p>
+
+<%= button_to 'Edit', "/national_parks/#{@national_park.id}/edit", method: :get %>
+<%= button_to 'Delete', "/national_parks/#{@national_park.id}", method: :delete %><br>
+
+<%= link_to "Trails at #{@national_park.name}", "/national_parks/#{@national_park.id}/trails"%>

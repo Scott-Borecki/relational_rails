@@ -1,21 +1,27 @@
 <h1>Trails at <%= @national_park.name %> National Park</h1>
+<%= link_to "#{@national_park.name} Details", "/national_parks/#{@national_park.id}" %>
 
 <% @trails.each do |trail| %>
-  <h3><%= link_to "#{trail.name}", "/trails/#{trail.id}" %></h3>
-  <%= button_to "Edit #{trail.name}", "/trails/#{trail.id}/edit", method: :get %>
-  <%= button_to "Delete #{trail.name}", "/trails/#{trail.id}", method: :delete %>
-  <p>Created at: <%= trail.created_at %></p>
-  <p>Updated at: <%= trail.updated_at %></p>
-  <p>Loop?: <%= trail.is_loop %></p>
-  <p>Length: <%= trail.length %> miles</p>
-  <br>
-<% end %>
+  <section id="nptid-<%= @national_park.id %>-<%= trail.id %>">
+    <h3><%= link_to "#{trail.name}", "/trails/#{trail.id}" %></h3>
+    <p>
+      Loop?: <%= trail.is_loop %><br>
+      Length: <%= trail.length %> miles<br>
+      Created at: <%= trail.created_at %><br>
+      Updated at: <%= trail.updated_at %>
+    </p>
 
+    <%= button_to 'Edit', "/trails/#{trail.id}/edit", method: :get %>
+    <%= button_to 'Delete', "/trails/#{trail.id}", method: :delete %>
+  </section>
+
+<% end %>
+<br>
 <%= link_to 'Create Trail', "/national_parks/#{@national_park.id}/trails/new" %>
 <%= link_to 'Sort Trails By Name', "/national_parks/#{@national_park.id}/trails?sort=name_asc" %>
-
+<br><br>
 <%= form_with url: "/national_parks/#{@national_park.id}/trails?length=#{@length}", method: :get, local: true do |form| %>
-  <%= form.label :length, 'Length:' %>
+  <%= form.label :length, 'Only return trails with a length more than:' %>
   <%= @length = form.text_field :length %>
-  <%= form.submit 'Only return trails with more than this length' %>
+  <%= form.submit 'Submit' %>
 <% end %>

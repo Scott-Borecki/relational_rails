@@ -1,8 +1,12 @@
 <h1><%= @trail.name %></h1>
+
+<p>
+  Loop?: <%= @trail.is_loop %><br>
+  Length: <%= @trail.length %> miles<br>
+  National Park: <%= NationalPark.find(@trail.national_park_id).name %><br>
+  Created at: <%= @trail.created_at %><br>
+  Updated at: <%= @trail.updated_at %>
+</p>
+
 <%= button_to 'Edit', "/trails/#{@trail.id}/edit", method: :get %>
 <%= button_to 'Delete', "/trails/#{@trail.id}", method: :delete %>
-<p>Created At: <%= @trail.created_at %></p>
-<p>Updated At: <%= @trail.updated_at %></p>
-<p>National Park: <%= NationalPark.find(@trail.national_park_id).name %></p>
-<p>Loop?: <%= @trail.is_loop %></p>
-<p>Length: <%= @trail.length %> miles</p>

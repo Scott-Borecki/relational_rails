@@ -1,12 +1,14 @@
 <h1>All National Parks</h1>
 
 <% @national_parks.each do |national_park| %>
-  <p>
-    <%= link_to "#{national_park.name}", "/national_parks/#{national_park.id}" %>
-    (Created At: <%= national_park.created_at %>)
-    <%= button_to "Edit #{national_park.name}", "/national_parks/#{national_park.id}/edit", method: :get %>
-    <%= button_to "Delete #{national_park.name}", "/national_parks/#{national_park.id}", method: :delete %>
-  </p>
+  <section id="npid-<%= national_park.id %>">
+    <p>
+      <%= link_to "#{national_park.name}", "/national_parks/#{national_park.id}" %>
+      (Created at: <%= national_park.created_at %>)
+      <%= button_to 'Edit', "/national_parks/#{national_park.id}/edit", method: :get %>
+      <%= button_to 'Delete', "/national_parks/#{national_park.id}", method: :delete %>
+    </p>
+  </section>
 <% end %>
 
 <p><%= link_to 'New National Park', '/national_parks/new' %></p>

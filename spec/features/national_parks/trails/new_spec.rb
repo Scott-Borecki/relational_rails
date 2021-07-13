@@ -16,9 +16,9 @@ RSpec.describe 'the national parks trails new page' do
   it 'can create a new trail' do
     visit "/national_parks/#{@denali.id}/trails/new"
 
-    fill_in('Name', with: 'Five Lakes')
-    fill_in('Length', with: '6')
-    check('Is loop')
+    fill_in('Name:', with: 'Five Lakes')
+    fill_in('Length (miles):', with: '6')
+    check('Loop:')
     click_button('Create Trail')
 
     expect(current_path).to eq("/national_parks/#{@denali.id}/trails")

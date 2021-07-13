@@ -1,14 +1,14 @@
-<h2>New Trail</h2>
+<h2>New Trail at <%= @national_park.name %> National Park</h2>
 
 <%= form_with url: "/national_parks/#{@national_park.id}/trails", method: :post, local: true do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
+  <%= form.label :name, 'Name:' %>
+  <%= form.text_field :name %><br><br>
 
-  <%= form.label :length %>
-  <%= form.text_field :length %>
+  <%= form.label :length, 'Length (miles):' %>
+  <%= form.text_field :length %><br><br>
 
-  <%= form.label :is_loop %>
-  <%= form.check_box :is_loop, {}, 'true', 'false' %>
+  <%= form.label :is_loop, 'Loop:' %>
+  <%= form.check_box :is_loop, {}, 'true', 'false' %><br><br>
 
   <%= form.hidden_field :national_park_id, value: "#{@national_park.id}" %>
 

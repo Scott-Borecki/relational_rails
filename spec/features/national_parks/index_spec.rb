@@ -21,17 +21,22 @@ RSpec.describe 'national parks index page' do
       visit '/national_parks'
 
       @parks.each do |park|
-        expect(page).to have_content(park.name)
-        expect(page).to have_button("Edit #{park.name}")
-        expect(page).to have_button("Delete #{park.name}")
+        within("#npid-#{park.id}") do
+          expect(page).to have_content(park.name)
+          expect(page).to have_content("Created at: #{park.created_at}")
+          expect(page).to have_button("Edit")
+          expect(page).to have_button("Delete")
+        end
       end
     end
 
     it 'can link to the national park edit page' do
       @parks.each do |park|
         visit '/national_parks'
-        click_button "Edit #{park.name}"
-        expect(current_path).to eq("/national_parks/#{park.id}/edit")
+        within("#npid-#{park.id}") do
+          click_button "Edit"
+          expect(current_path).to eq("/national_parks/#{park.id}/edit")
+        end
       end
     end
 
@@ -79,7 +84,7 @@ RSpec.describe 'national parks index page' do
       visit '/national_parks'
 
       parks.each do |park|
-        expect(page).to have_content("Created At: #{park.created_at}")
+        expect(page).to have_content("Created at: #{park.created_at}")
       end
 
       expect(kenai_fjords.name).to appear_before(denali.name)

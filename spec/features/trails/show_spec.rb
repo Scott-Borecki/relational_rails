@@ -19,13 +19,13 @@ RSpec.describe 'trails show page' do
       visit "/trails/#{trail.id}"
 
       expect(page).to have_content(trail.name)
-      expect(page).to have_button('Edit')
-      expect(page).to have_button('Delete')
-      expect(page).to have_content("Created At: #{trail.created_at}")
-      expect(page).to have_content("Updated At: #{trail.updated_at}")
-      expect(page).to have_content("National Park: #{NationalPark.find(trail.national_park_id).name}")
       expect(page).to have_content("Loop?: #{trail.is_loop}")
       expect(page).to have_content("Length: #{trail.length}")
+      expect(page).to have_content("National Park: #{NationalPark.find(trail.national_park_id).name}")
+      expect(page).to have_content("Created at: #{trail.created_at}")
+      expect(page).to have_content("Updated at: #{trail.updated_at}")
+      expect(page).to have_button('Edit')
+      expect(page).to have_button('Delete')
     end
   end
 

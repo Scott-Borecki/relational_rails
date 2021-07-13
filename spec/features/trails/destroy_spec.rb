@@ -11,7 +11,9 @@ RSpec.describe 'trail destroy page' do
   it 'can delete record of trail from trails index' do
     visit '/trails'
 
-    click_button "Delete #{@triple.name}"
+    within("#tid-#{@triple.id}") do
+      click_button "Delete"
+    end
 
     expect(current_path).to eq('/trails')
     expect(page).to_not have_content('Triple Lakes Trail')
@@ -21,7 +23,9 @@ RSpec.describe 'trail destroy page' do
   it 'can delete record of trail from national park trails index' do
     visit "/national_parks/#{@denali.id}/trails"
 
-    click_button "Delete #{@triple.name}"
+    within("#nptid-#{@denali.id}-#{@triple.id}") do
+      click_button "Delete"
+    end
 
     expect(current_path).to eq('/trails')
     expect(page).to_not have_content('Triple Lakes Trail')
