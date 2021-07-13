@@ -10,9 +10,9 @@ RSpec.describe 'new campground' do
   it 'can create a new campground' do
     visit '/campgrounds/new'
 
-    fill_in('Name', with: 'Echo Lake Campground')
-    fill_in(:reservation_allowed, with: true)
+    fill_in(:name, with: 'Echo Lake Campground')
     fill_in(:max_nights, with: 7)
+    check(:reservation_allowed)
 
     click_button('Create Campground')
     expect(current_path).to eq('/campgrounds')
