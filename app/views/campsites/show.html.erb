@@ -8,5 +8,5 @@
   Updated at: <%= @campsite.updated_at %>
 </p>
 
-<%= button_to 'Edit', "/campsites/#{@campsite.id}/edit" %>
+<%= button_to 'Edit', "/campsites/#{@campsite.id}/edit", method: :get %>
 <%= button_to 'Delete', "/campsites/#{@campsite.id}", method: :delete %>
