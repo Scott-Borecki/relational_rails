@@ -14,8 +14,9 @@ RSpec.describe 'new campsite' do
     visit "/campgrounds/#{@campground.id}/campsites/new"
 
     fill_in('Name', with: 'Echo Loop Site 4')
-    fill_in(:tent_only, with: true)
     fill_in(:overnight_fee, with: 15.75)
+    check(:tent_only)
+
 
     click_button('Create Campsite')
     expect(current_path).to eq("/campgrounds/#{@campground.id}/campsites")
