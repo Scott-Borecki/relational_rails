@@ -1,5 +1,5 @@
 class Campground < ApplicationRecord
-  has_many :campsites
+  has_many :campsites, :dependent => :destroy
 
   def self.order_by_recently_created
     order(created_at: :desc)
