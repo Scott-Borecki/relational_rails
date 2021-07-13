@@ -11,7 +11,7 @@ class CampgroundsController < ApplicationController
   end
 
   def create
-    @campground = Campground.create(campground_params)
+    campground = Campground.create(campground_params)
     redirect_to '/campgrounds'
   end
 
@@ -20,16 +20,13 @@ class CampgroundsController < ApplicationController
   end
 
   def update
-    @campground = Campground.find(params[:id])
-    @campground.update(campground_params)
-    redirect_to "/campgrounds/#{@campground.id}"
+    campground = Campground.find(params[:id])
+    campground.update(campground_params)
+    redirect_to "/campgrounds/#{campground.id}"
   end
 
   def destroy
-    campground = Campground.find(params[:id])
-    campsites = campground.campsites
-    campsites.destroy_all
-    campground.destroy
+    Campground.destroy(params[:id])
     redirect_to '/campgrounds'
   end
 
