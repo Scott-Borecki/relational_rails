@@ -1,10 +1,6 @@
 class NationalPark < ApplicationRecord
   has_many :trails, :dependent => :destroy
 
-  def self.order_by_recently_created
-    order(created_at: :desc)
-  end
-
   def self.order_by_most_trails
     joins(:trails).
     group(:id).
