@@ -23,7 +23,9 @@ RSpec.describe 'delete a campsite' do
 
     expect(page).to have_content('Site 15')
 
-    click_button 'Delete'
+    within("#csid#{@campsite.id}") do
+      click_button 'Delete'
+    end
 
     expect(current_path).to eq('/campsites')
     expect(page).to_not have_content('Site 15')

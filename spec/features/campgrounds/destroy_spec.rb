@@ -32,9 +32,12 @@ RSpec.describe 'delete a campground' do
 
     expect(page).to have_content('Sunset Point Campground')
 
-    click_button 'Delete'
+    within("#cgid#{@campground.id}") do
+      click_button 'Delete'
+    end
 
     expect(current_path).to eq('/campgrounds')
     expect(page).to_not have_content('Sunset Point Campground')
+
   end
 end

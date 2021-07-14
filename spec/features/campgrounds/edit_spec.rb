@@ -31,9 +31,19 @@ RSpec.describe 'edit campground' do
 
   it 'can link to edit campground on idex page' do
     visit '/campgrounds'
-    within "#cgid#{@campground.id}" do
-      click_button 'Edit'
-      expect(current_path).to eq("/campgrounds/#{@campground.id}/edit")
+
+    within("#cgid#{@campground.id}") do
+      click_button "Edit"
     end
+
+    expect(current_path).to eq("/campgrounds/#{@campground.id}/edit")
+
+    visit '/campgrounds'
+
+    within("#cgid#{@campground_2.id}") do
+      click_button "Edit"
+    end
+
+    expect(current_path).to eq("/campgrounds/#{@campground_2.id}/edit")
   end
 end
