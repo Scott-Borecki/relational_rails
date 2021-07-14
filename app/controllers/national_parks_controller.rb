@@ -3,7 +3,7 @@ class NationalParksController < ApplicationController
     if params[:sort] == 'most_trails'
       @national_parks = NationalPark.order_by_most_trails
     else
-      @national_parks = NationalPark.order_by_most_recent
+      @national_parks = NationalPark.order_by_recently_created
     end
   end
 

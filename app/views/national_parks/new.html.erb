@@ -1,12 +1,14 @@
-<%= form_with url: '/national_parks', method: :post, local: true  do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
+<h2>New National Park</h2>
 
-  <%= form.label :acreage %>
-  <%= form.text_field :acreage %>
+<%= form_with url: '/national_parks', method: :post, local: true do |form| %>
+  <%= form.label :name, 'Name:' %>
+  <%= form.text_field :name %><br><br>
 
-  <%= form.label :is_seasonal %>
-  <%= form.check_box :is_seasonal, {}, 'true', 'false' %>
+  <%= form.label :acreage, 'Acres:' %>
+  <%= form.text_field :acreage %><br><br>
+
+  <%= form.label :is_seasonal, 'Seasonal:' %>
+  <%= form.check_box :is_seasonal, {}, 'true', 'false' %><br><br>
 
   <%= form.submit 'Create National Park' %>
 <% end %>

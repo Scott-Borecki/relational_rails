@@ -11,9 +11,9 @@ RSpec.describe 'national park destroy page' do
   it 'can delete record of national park and associated trails' do
     visit "/national_parks/#{@denali.id}"
 
-    click_link "Delete #{@denali.name}"
+    click_button 'Delete'
 
-    expect(current_path).to eq("/national_parks")
+    expect(current_path).to eq('/national_parks')
     expect(page).to_not have_content('Denali')
   end
 end

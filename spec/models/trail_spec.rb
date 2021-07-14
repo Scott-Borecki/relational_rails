@@ -15,9 +15,9 @@ describe Trail, type: :model do
   end
 
   describe 'class methods' do
-    describe '#is_loop?' do
+    describe '#loop_only' do
       it 'can show only trails that are a loop' do
-        expect(Trail.is_loop?).to eq([@double, @single])
+        expect(Trail.loop_only).to eq([@double, @single])
       end
     end
   end
