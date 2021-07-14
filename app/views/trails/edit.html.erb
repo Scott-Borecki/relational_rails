@@ -8,8 +8,7 @@
   <%= form.text_field :length, :value => "#{@trail.length}" %><br><br>
 
   <%= form.label :is_loop, 'Loop:' %>
-  <% is_checked = @trail.is_loop ? "checked" : "unchecked" %>
-  <%= form.check_box :is_loop, { :checked => is_checked }, 'true', 'false' %><br><br>
+  <%= form.check_box :is_loop, { :checked => @trail.is_loop }, 'true', 'false' %><br><br>
 
   <%= form.label :national_park_id %>
   <%= form.collection_select :national_park_id, NationalPark.all, :id, :name, { :selected => "#{@trail.national_park_id}" } %><br><br>

@@ -8,8 +8,7 @@
   <%= form.text_field :acreage, :value => "#{@national_park.acreage}" %><br><br>
 
   <%= form.label :is_seasonal, 'Seasonal:' %>
-  <% is_checked = @national_park.is_seasonal ? "checked" : "unchecked" %>
-  <%= form.check_box :is_seasonal, { :checked => is_checked }, 'true', 'false' %><br><br>
+  <%= form.check_box :is_seasonal, { :checked => @national_park.is_seasonal }, 'true', 'false' %><br><br>
 
   <%= form.submit 'Update National Park' %>
 <% end %>
