@@ -7,7 +7,7 @@ RSpec.describe 'edit campsite' do
   end
   it 'can link to edit a campsite' do
     visit "/campsites/#{@campsite.id}"
-    click_link "Update #{@campsite.name}"
+    click_button 'Edit'
     expect(current_path).to eq("/campsites/#{@campsite.id}/edit")
   end
 
@@ -18,8 +18,8 @@ RSpec.describe 'edit campsite' do
     visit "/campsites/#{@campsite.id}/edit"
 
     fill_in(:name, with: 'Cottonweood Grove Site 111')
-    fill_in(:tent_only, with: true)
     fill_in(:overnight_fee, with: 28)
+    check(:tent_only)
 
     click_button('Update Campsite')
     expect(current_path).to eq("/campsites/#{@campsite.id}")
@@ -28,13 +28,18 @@ RSpec.describe 'edit campsite' do
 
   it 'can link to edit campsite on idex page' do
     visit '/campsites'
-    click_button "Edit #{@campsite.name}"
+    within "#csid#{@campsite.id}" do
+      click_button 'Edit'
+    end
     expect(current_path).to eq("/campsites/#{@campsite.id}/edit")
   end
 
   it "can link to edit campsite on campground's campsite idex page" do
     visit "/campgrounds/#{@campground.id}/campsites"
-    click_button "Edit #{@campsite.name}"
+    within "#cgcsid#{@campsite.id}" do
+      click_button 'Edit'
+    end
+
     expect(current_path).to eq("/campsites/#{@campsite.id}/edit")
   end
 end

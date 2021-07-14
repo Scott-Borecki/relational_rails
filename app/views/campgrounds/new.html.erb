@@ -1,10 +1,12 @@
+<h2>New Campground</h2>
+
 <%= form_with url: '/campgrounds', method: :post, local: true do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-  <%= form.label :reservation_allowed %>
-  <%= form.text_field :reservation_allowed %>
-  <%= form.label :max_nights %>
-  <%= form.text_field :max_nights %>
+<%= form.label :name, 'Name:'%>
+<%= form.text_field :name %><br><br>
+<%= form.label :max_nights, 'Max Nights:' %>
+<%= form.text_field :max_nights %><br><br>
+<%= form.label :reservation_allowed, 'Reservation Allowed:' %>
+<%= form.check_box :reservation_allowed, {}, 'true', 'false' %><br><br>
 
   <%= form.submit 'Create Campground' %>
 <% end %>

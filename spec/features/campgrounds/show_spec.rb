@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'campground show page' do
   before :each do
-    @sunset_point = Campground.create!(name: "Sunset Point Campground", reservation_allowed: false, max_nights: 7)
-    @cherry_creek = Campground.create!(name: "Cherry Creek Campground", reservation_allowed: true, max_nights: 14)
+    @sunset_point = Campground.create!(name: 'Sunset Point Campgroun', reservation_allowed: false, max_nights: 7)
+    @cherry_creek = Campground.create!(name: 'Cherry Creek Campground', reservation_allowed: true, max_nights: 14)
   end
 
   it "shows a campground's name and details" do
@@ -39,11 +39,11 @@ RSpec.describe 'campground show page' do
 
   it 'can link to list of campsites in campground' do
     visit "/campgrounds/#{@sunset_point.id}"
-    click_link 'Campsites at Campground'
+    click_link "Campsites at #{@sunset_point.name}"
     expect(current_path).to eq("/campgrounds/#{@sunset_point.id}/campsites")
 
     visit "/campgrounds/#{@cherry_creek.id}"
-    click_link 'Campsites at Campground'
+    click_link "Campsites at #{@cherry_creek.name}"
     expect(current_path).to eq("/campgrounds/#{@cherry_creek.id}/campsites")
   end
 

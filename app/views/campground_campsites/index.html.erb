@@ -1,25 +1,26 @@
 <h1>Campsites at <%= @campground.name %></h1>
+<%= link_to "#{@campground.name} Details", "/campgrounds/#{@campground.id}", method: :get %>
 
 <% @campsites.each do |campsite| %>
-  <h3><a href="/campsites/<%= campsite.id %>"><%= campsite.name %></a></h3>
-  <p>
-    Campground: <%= Campground.find(campsite.campground_id).name %><br>
-    Created at: <%= campsite.created_at %><br>
-    Updated at: <%= campsite.updated_at %><br>
-    Campsite is Tent Only: <%= campsite.tent_only %><br>
-    Overnight Fee: <%= campsite.overnight_fee %>
-  </p>
-  <%= button_to "Edit #{campsite.name}", "/campsites/#{campsite.id}/edit", method: :get %>
-<% end %>
-
-<%= form_with url: "/campgrounds/#{@campground.id}/campsites?amount=#{@num}", method: :get, local: true do |form| %>
-  <%= form.label :amount %>
-  <%= @num = form.text_field :amount %>
-
-  <%= form.submit 'Submit' %>
-<% end %>
+  <section id="cgcsid<%= campsite.id %>">
+    <h3><%= link_to "#{campsite.name}", "/campsites/#{campsite.id}" %></h3>
+    <p>
+      Campsite is Tent Only: <%= campsite.tent_only %><br>
+      Overnight Fee: <%= campsite.overnight_fee %><br>
+      Campground: <%= Campground.find(campsite.campground_id).name %><br>
+      Created at: <%= campsite.created_at %><br>
+      Updated at: <%= campsite.updated_at %>
+    </p>
+    <%= button_to 'Edit', "/campsites/#{campsite.id}/edit", method: :get %>
+    <%= button_to 'Delete', "/campsites/#{campsite.id}", method: :delete %>
+  </section>
+<% end %><br>
 
 <%= link_to 'Sort by Name', "/campgrounds/#{@campground.id}/campsites?sort=asc", method: :get %>
+<%= link_to 'Create Campsite', "/campgrounds/#{@campground.id}/campsites/new", method: :get %><br><br>
 
-<a href="/campgrounds/<%= @campground.id %>">Campground Details</a><br>
-<a href="/campgrounds/<%= @campground.id %>/campsites/new">Create Campsite</a><br>
+<%= form_with url: "/campgrounds/#{@campground.id}/campsites?amount=#{@num}", method: :get, local: true do |form| %>
+  <%= form.label :amount, 'Only return campsites with an overnight fee more than: ' %>
+  <%= @num = form.text_field :amount %>
+  <%= form.submit 'Submit' %>
+<% end %>

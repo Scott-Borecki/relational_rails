@@ -1,10 +1,12 @@
+<h2>Edit <%= @campground.name %> </h2>
+
 <%= form_with url: "/campgrounds/#{@campground.id}/", method: :patch, local: true do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-  <%= form.label :reservation_allowed %>
-  <%= form.text_field :reservation_allowed %>
-  <%= form.label :max_nights %>
-  <%= form.text_field :max_nights %>
+  <%= form.label :name, 'Name:'%>
+  <%= form.text_field :name, value: "#{@campground.name}" %><br><br>
+  <%= form.label :max_nights, 'Max Nights:' %>
+  <%= form.text_field :max_nights, value: "#{@campground.max_nights}" %><br><br>
+  <%= form.label :reservation_allowed, 'Reservation Allowed:' %>
+  <%= form.check_box :reservation_allowed, {checked: true}, 'true', 'false' %><br><br>
 
   <%= form.submit 'Update Campground' %>
 <% end %>
