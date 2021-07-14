@@ -26,6 +26,14 @@ RSpec.describe 'edit campsite' do
     expect(page).to have_content('Cottonweood Grove Site 111')
   end
 
+  it 'can prefill current campsite information' do
+    visit "/campsites/#{@campsite.id}/edit"
+
+    expect(page).to have_field(:name, with: "#{@campsite.name}")
+    expect(page).to have_field(:overnight_fee, with: "#{@campsite.overnight_fee}")
+    expect(page).to have_checked_field(:tent_only)
+  end
+
   it 'can link to edit campsite on idex page' do
     visit '/campsites'
     within "#csid#{@campsite.id}" do

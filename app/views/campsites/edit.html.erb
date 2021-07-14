@@ -6,7 +6,7 @@
   <%= form.label :overnight_fee, 'Overnight Fee:' %>
   <%= form.text_field :overnight_fee, value: "#{@campsite.overnight_fee}" %><br><br>
   <%= form.label :tent_only, 'Tent Only:' %>
-  <%= form.check_box :tent_only, {checked: true}, 'true', 'false' %><br><br>
+  <%= form.check_box :tent_only, {checked: @campsite.tent_only}, 'true', 'false' %><br><br>
   <%= form.label :campground_id, 'Campground:' %>
   <%= form.collection_select :campground_id, Campground.all, :id, :name %><br><br>
 
