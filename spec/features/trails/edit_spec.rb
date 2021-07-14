@@ -4,6 +4,7 @@ RSpec.describe 'trails edit page' do
   before :each do
     @denali = NationalPark.create!(name: 'Denali', acreage: 6_100_000, is_seasonal: true)
     @triple = @denali.trails.create!(name: 'Tripl Lakes Trail', length: 9, is_loop: true)
+    @quadruple = @denali.trails.create!(name: 'Quadruple Lakes Trail', length: 12, is_loop: false)
   end
 
   it 'can link to the trail edit page' do
@@ -12,6 +13,20 @@ RSpec.describe 'trails edit page' do
     click_button 'Edit'
 
     expect(current_path).to eq("/trails/#{@triple.id}/edit")
+  end
+
+  it 'can prepopulate the edit form' do
+    visit "/trails/#{@triple.id}/edit"
+
+    expect(page).to have_field(:name, with: "#{@triple.name}")
+    expect(page).to have_field(:length, with: "#{@triple.length}")
+    expect(page).to have_checked_field(:is_loop)
+
+    visit "/trails/#{@quadruple.id}/edit"
+
+    expect(page).to have_field(:name, with: "#{@quadruple.name}")
+    expect(page).to have_field(:length, with: "#{@quadruple.length}")
+    expect(page).to have_unchecked_field(:is_loop)
   end
 
   it 'can update a trail record' do
