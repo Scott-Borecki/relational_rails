@@ -17,7 +17,7 @@ describe NationalPark, type: :model do
   describe 'class methods' do
     describe '::order_by_most_recent' do
       it 'can return the national parks by most recently created' do
-        expect(NationalPark.order_by_most_recent).to eq([@kenai_fjords, @katmai, @denali])
+        expect(NationalPark.order_by_recently_created).to eq([@kenai_fjords, @katmai, @denali])
       end
     end
 

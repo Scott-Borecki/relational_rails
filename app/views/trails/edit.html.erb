@@ -1,15 +1,18 @@
+<h2>Edit <%= @trail.name %> </h2>
+
 <%= form_with url: "/trails/#{@trail.id}", methods: :patch, local: true do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
+  <%= form.label :name, 'Name:' %>
+  <%= form.text_field :name, :value => "#{@trail.name}" %><br><br>
 
-  <%= form.label :length %>
-  <%= form.text_field :length %>
+  <%= form.label :length, 'Length (miles):' %>
+  <%= form.text_field :length, :value => "#{@trail.length}" %><br><br>
 
-  <%= form.label :is_loop %>
-  <%= form.check_box :is_loop, {}, 'true', 'false' %>
+  <%= form.label :is_loop, 'Loop:' %>
+  <% is_checked = @trail.is_loop ? "checked" : "unchecked" %>
+  <%= form.check_box :is_loop, { :checked => is_checked }, 'true', 'false' %><br><br>
 
   <%= form.label :national_park_id %>
-  <%= form.collection_select :national_park_id, NationalPark.all, :id, :name %>
+  <%= form.collection_select :national_park_id, NationalPark.all, :id, :name, { :selected => "#{@trail.national_park_id}" } %><br><br>
 
   <%= form.submit 'Update Trail' %>
 <% end %>

@@ -1,10 +1,6 @@
 class NationalPark < ApplicationRecord
   has_many :trails, :dependent => :destroy
 
-  def self.order_by_most_recent
-    order(created_at: :desc)
-  end
-
   def self.order_by_most_trails
     joins(:trails).
     group(:id).
@@ -20,6 +16,6 @@ class NationalPark < ApplicationRecord
   end
 
   def filter_by_length_greater_than(length)
-    trails.where("length > #{length}")
+    trails.where('length > ?', length)
   end
 end

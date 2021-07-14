@@ -9,7 +9,7 @@ RSpec.describe 'trails edit page' do
   it 'can link to the trail edit page' do
     visit "/trails/#{@triple.id}"
 
-    click_link "Update #{@triple.name}"
+    click_button 'Edit'
 
     expect(current_path).to eq("/trails/#{@triple.id}/edit")
   end
@@ -21,9 +21,9 @@ RSpec.describe 'trails edit page' do
 
     visit "/trails/#{@triple.id}/edit"
 
-    fill_in('Name', with: 'Triple Lakes Trail')
-    fill_in('Length', with: '9')
-    check('Is loop')
+    fill_in('Name:', with: 'Triple Lakes Trail')
+    fill_in('Length (miles):', with: '9')
+    check('Loop:')
     select('Denali', :from => 'national_park_id')
     click_button('Update Trail')
 

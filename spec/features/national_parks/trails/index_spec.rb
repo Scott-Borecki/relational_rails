@@ -20,13 +20,15 @@ RSpec.describe 'national parks trails index page' do
       trails.each do |trail|
         visit "/national_parks/#{park.id}/trails"
 
-        expect(page).to have_content(trail.name)
-        expect(page).to have_content("Length: #{trail.length} miles")
-        expect(page).to have_content("Loop?: #{trail.is_loop}")
-        expect(page).to have_content("Created At: #{trail.created_at}")
-        expect(page).to have_content("Updated At: #{trail.updated_at}")
-        expect(page).to have_link("Update #{trail.name}")
-        expect(page).to have_link("Delete #{trail.name}")
+        within("#nptid-#{park.id}-#{trail.id}") do
+          expect(page).to have_content(trail.name)
+          expect(page).to have_content("Loop?: #{trail.is_loop}")
+          expect(page).to have_content("Length: #{trail.length} miles")
+          expect(page).to have_content("Created at: #{trail.created_at}")
+          expect(page).to have_content("Updated at: #{trail.updated_at}")
+          expect(page).to have_button('Edit')
+          expect(page).to have_button('Delete')
+        end
       end
     end
   end
@@ -35,8 +37,12 @@ RSpec.describe 'national parks trails index page' do
     @park_trails.each do |park, trails|
       trails.each do |trail|
         visit "/national_parks/#{park.id}/trails"
-        click_link "Update #{trail.name}"
-        expect(current_path).to eq("/trails/#{trail.id}/edit")
+
+        within("#nptid-#{park.id}-#{trail.id}") do
+          click_button 'Edit'
+
+          expect(current_path).to eq("/trails/#{trail.id}/edit")
+        end
       end
     end
   end
@@ -53,8 +59,8 @@ RSpec.describe 'national parks trails index page' do
   it 'can return trails with more than a specified length' do
     visit "/national_parks/#{@denali.id}/trails"
 
-    fill_in('Length', with: '10')
-    click_button 'Only return trails with more than this length'
+    fill_in('Only return trails with a length more than:', with: '10')
+    click_button 'Submit'
 
     expect(current_path).to eq("/national_parks/#{@denali.id}/trails")
     expect(page).to have_content("#{@quadruple.name}")
@@ -69,7 +75,9 @@ RSpec.describe 'national parks trails index page' do
     @parks.each do |park|
       pages.each do |link_text, path|
         visit "/national_parks/#{park.id}/trails"
+
         click_link "#{link_text}"
+
         expect(current_path).to eq("#{path}")
       end
     end

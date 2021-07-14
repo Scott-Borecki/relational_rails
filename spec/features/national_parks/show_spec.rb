@@ -19,13 +19,14 @@ RSpec.describe 'national parks show page' do
       visit "/national_parks/#{park.id}"
 
       expect(page).to have_content(park.name)
-      expect(page).to have_content("Acreage: #{park.acreage}")
       expect(page).to have_content("Seasonal?: #{park.is_seasonal}")
+      expect(page).to have_content("Acreage: #{park.acreage}")
       expect(page).to have_content("Number of Trails: #{park.trail_count}")
-      expect(page).to have_content("Created At: #{park.created_at}")
-      expect(page).to have_content("Updated At: #{park.updated_at}")
-      expect(page).to have_link("Update #{park.name}")
-      expect(page).to have_link("Delete #{park.name}")
+      expect(page).to have_content("Created at: #{park.created_at}")
+      expect(page).to have_content("Updated at: #{park.updated_at}")
+      expect(page).to have_button('Edit')
+      expect(page).to have_button('Delete')
+      expect(page).to have_link("Trails at #{park.name}")
     end
   end
 
