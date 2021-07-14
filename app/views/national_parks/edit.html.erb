@@ -2,13 +2,14 @@
 
 <%= form_with url: "/national_parks/#{@national_park.id}", methods: :patch, local: true do |form| %>
   <%= form.label :name, 'Name:' %>
-  <%= form.text_field :name %><br><br>
+  <%= form.text_field :name, :value => "#{@national_park.name}" %><br><br>
 
   <%= form.label :acreage, 'Acres:' %>
-  <%= form.text_field :acreage %><br><br>
+  <%= form.text_field :acreage, :value => "#{@national_park.acreage}" %><br><br>
 
   <%= form.label :is_seasonal, 'Seasonal:' %>
-  <%= form.check_box :is_seasonal, {}, 'true', 'false' %><br><br>
+  <% is_checked = @national_park.is_seasonal ? "checked" : "unchecked" %>
+  <%= form.check_box :is_seasonal, { :checked => is_checked }, 'true', 'false' %><br><br>
 
   <%= form.submit 'Update National Park' %>
 <% end %>
