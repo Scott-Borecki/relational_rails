@@ -11,10 +11,10 @@
 
   <body>
     <nav>
-      <a href="/national_parks">National Park Index</a> |
-      <a href="/trails">Trail Index</a> |
-      <a href="/campgrounds">Campground Index</a> |
-      <a href="/campsites">Campsite Index</a>
+      <%= link_to 'National Park Index', '/national_parks' %> |
+      <%= link_to 'Trail Index', '/trails' %> |
+      <%= link_to 'Campground Index', '/campgrounds' %> |
+      <%= link_to 'Campsite Index', '/campsites' %>
     </nav>
     <%= yield %>
   </body>
