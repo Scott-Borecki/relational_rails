@@ -1,13 +1,14 @@
 <h2>Edit <%= @campsite.name %> </h2>
 
 <%= form_with url: "/campsites/#{@campsite.id}", method: :patch, local: true do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-  <%= form.label :overnight_fee %>
-  <%= form.text_field :overnight_fee %>
-  <%= form.label :tent_only %>
-  <%= form.check_box :tent_only, {}, 'true', 'false' %>
-  <%= form.collection_select :campground_id, Campground.all, :id, :name %>
+  <%= form.label :name, 'Name:' %>
+  <%= form.text_field :name, value: "#{@campsite.name}" %><br><br>
+  <%= form.label :overnight_fee, 'Overnight Fee:' %>
+  <%= form.text_field :overnight_fee, value: "#{@campsite.overnight_fee}" %><br><br>
+  <%= form.label :tent_only, 'Tent Only:' %>
+  <%= form.check_box :tent_only, {checked: true}, 'true', 'false' %><br><br>
+  <%= form.label :campground_id, 'Campground:' %>
+  <%= form.collection_select :campground_id, Campground.all, :id, :name %><br><br>
 
   <%= form.submit 'Update Campsite' %>
 <% end %>

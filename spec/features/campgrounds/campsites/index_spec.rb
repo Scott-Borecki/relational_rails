@@ -32,7 +32,7 @@ RSpec.describe 'campground campsites index' do
 
   it 'can link to return to campground' do
     visit "/campgrounds/#{@sunset_point.id}/campsites"
-    click_link 'Campground Details'
+    click_link "#{@sunset_point.name} Details"
     expect(current_path).to eq("/campgrounds/#{@sunset_point.id}")
   end
 
@@ -76,7 +76,7 @@ RSpec.describe 'campground campsites index' do
     expect(page).to have_content(@cottonwood_111.name)
 
     fill_in(:amount, with: 30)
-    click_button 'Campsites greater than overnight fee'
+    click_button 'Submit'
 
     expect(current_path).to eq("/campgrounds/#{@cherry_creek.id}/campsites")
     expect(page).to have_content(@abilene_10.name)

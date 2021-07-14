@@ -1,6 +1,6 @@
 class CampsitesController < ApplicationController
   def index
-    @campsites = Campsite.all
+    @campsites = Campsite.tent_only
   end
 
   def show

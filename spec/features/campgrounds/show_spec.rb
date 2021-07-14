@@ -39,11 +39,11 @@ RSpec.describe 'campground show page' do
 
   it 'can link to list of campsites in campground' do
     visit "/campgrounds/#{@sunset_point.id}"
-    click_link 'Campsites at Campground'
+    click_link "Campsites at #{@sunset_point.name}"
     expect(current_path).to eq("/campgrounds/#{@sunset_point.id}/campsites")
 
     visit "/campgrounds/#{@cherry_creek.id}"
-    click_link 'Campsites at Campground'
+    click_link "Campsites at #{@cherry_creek.name}"
     expect(current_path).to eq("/campgrounds/#{@cherry_creek.id}/campsites")
   end
 
