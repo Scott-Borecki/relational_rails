@@ -63,12 +63,17 @@ RSpec.describe 'national parks index page' do
     it 'can sort national parks by number of trails' do
       visit '/national_parks'
 
+      expect(page).to_not have_content("Number of Trails:")
+
       click_link 'Sort By Number of Trails'
 
       expect(current_path).to eq('/national_parks')
       expect(@denali.name).to appear_before(@katmai.name)
       expect(@denali.name).to appear_before(@kenai_fjords.name)
       expect(@kenai_fjords.name).to appear_before(@katmai.name)
+      expect(page).to have_content("Number of Trails: #{@denali.trail_count}")
+      expect(page).to have_content("Number of Trails: #{@katmai.trail_count}")
+      expect(page).to have_content("Number of Trails: #{@kenai_fjords.trail_count}")
     end
   end
 
