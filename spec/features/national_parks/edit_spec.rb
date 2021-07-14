@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'national parks edit page' do
   before :each do
     @denali = NationalPark.create!(name: 'Denal', acreage: 6_100_000, is_seasonal: true)
+    @kenai_fjords = NationalPark.create!(name: 'Kenai Fjords', acreage: 669_984, is_seasonal: false)
   end
 
   it 'can link to the national park edit page' do
@@ -11,6 +12,20 @@ RSpec.describe 'national parks edit page' do
     click_button 'Edit'
 
     expect(current_path).to eq("/national_parks/#{@denali.id}/edit")
+  end
+
+  it 'can prepopulate the edit form' do
+    visit "/national_parks/#{@denali.id}/edit"
+
+    expect(page).to have_field(:name, with: "#{@denali.name}")
+    expect(page).to have_field(:acreage, with: "#{@denali.acreage}")
+    expect(page).to have_checked_field(:is_seasonal)
+
+    visit "/national_parks/#{@kenai_fjords.id}/edit"
+
+    expect(page).to have_field(:name, with: "#{@kenai_fjords.name}")
+    expect(page).to have_field(:acreage, with: "#{@kenai_fjords.acreage}")
+    expect(page).to have_unchecked_field(:is_seasonal)
   end
 
   it 'can update a national park record' do
