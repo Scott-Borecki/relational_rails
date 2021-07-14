@@ -5,7 +5,7 @@
     <p>
       <%= link_to "#{campground.name}", "/campgrounds/#{campground.id}", method: :get %>
       (Created at: <%= campground.created_at %>)
-      <% if self.params[:sort] %>
+      <% if params[:sort] %>
         <%= "Number of Campsites: #{campground.campsite_count}" %>
       <% end %>
     </p>

@@ -6,7 +6,7 @@
   <%= form.label :max_nights, 'Max Nights:' %>
   <%= form.text_field :max_nights, value: "#{@campground.max_nights}" %><br><br>
   <%= form.label :reservation_allowed, 'Reservation Allowed:' %>
-  <%= form.check_box :reservation_allowed, {checked: true}, 'true', 'false' %><br><br>
+  <%= form.check_box :reservation_allowed, {checked: @campground.reservation_allowed}, 'true', 'false' %><br><br>
 
   <%= form.submit 'Update Campground' %>
 <% end %>

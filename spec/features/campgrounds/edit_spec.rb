@@ -29,6 +29,14 @@ RSpec.describe 'edit campground' do
     expect(page).to have_content('Reservations Allowed: false')
   end
 
+  it 'can prefill current campground information' do
+    visit "/campgrounds/#{@campground.id}/edit"
+
+    expect(page).to have_field(:name, with: "#{@campground.name}")
+    expect(page).to have_field(:max_nights, with: "#{@campground.max_nights}")
+    expect(page).to have_unchecked_field(:reservation_allowed)
+  end
+
   it 'can link to edit campground on idex page' do
     visit '/campgrounds'
 
