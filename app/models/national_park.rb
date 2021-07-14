@@ -12,7 +12,7 @@ class NationalPark < ApplicationRecord
   end
 
   def sort_by_name
-    trails.order(name: :asc)
+    trails.order(Arel.sql('lower(name)'))
   end
 
   def filter_by_length_greater_than(length)

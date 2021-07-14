@@ -41,7 +41,7 @@ describe NationalPark, type: :model do
 
     describe '#sort_by_name' do
       it 'can sort the trails associated to the national park by name' do
-        berry = @denali.trails.create!(name: 'Berry Trail', length: 4, is_loop: true)
+        berry = @denali.trails.create!(name: 'berry Trail', length: 4, is_loop: true)
         deer = @denali.trails.create!(name: 'Deer Trail', length: 8, is_loop: true)
 
         expect(@denali.sort_by_name).to eq([berry, deer, @quadruple, @triple])
