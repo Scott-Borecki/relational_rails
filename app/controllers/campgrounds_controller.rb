@@ -1,6 +1,10 @@
 class CampgroundsController < ApplicationController
   def index
-    @campgrounds = Campground.order_by_recently_created
+    if params[:sort]
+      @campgrounds = Campground.order_by_most_campsites
+    else
+      @campgrounds = Campground.order_by_recently_created
+    end
   end
 
   def show

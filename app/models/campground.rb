@@ -5,6 +5,10 @@ class Campground < ApplicationRecord
     order(created_at: :desc)
   end
 
+  def self.order_by_most_campsites
+    left_joins(:campsites).group(:id).order(Arel.sql('COUNT(campsites.id) DESC'))
+  end
+
   def campsite_count
     campsites.length
   end

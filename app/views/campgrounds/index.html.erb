@@ -8,5 +8,8 @@
     <%= button_to "Delete #{campground.name}", "/campgrounds/#{campground.id}", method: :delete %>
   </h3>
 <% end %>
+      <% if self.params[:sort] %>
+        <%= "Number of Campsites: #{campground.campsite_count}" %>
+      <% end %>
 
 <%= link_to 'New Campground', '/campgrounds/new', method: :get %>
