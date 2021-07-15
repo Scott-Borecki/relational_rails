@@ -1,16 +1,22 @@
 <h1>All Campgrounds</h1>
 
 <% @campgrounds.each do |campground| %>
-  <section id="cgid<%= campground.id %>">
-    <p>
-      <%= link_to "#{campground.name}", "/campgrounds/#{campground.id}", method: :get %>
+  <section class="record" id="cgid<%= campground.id %>">
+    <section class="container">
+      <%= link_to "#{campground.name}", "/campgrounds/#{campground.id}", method: :get, class: "item-title" %>
+      <%= button_to 'Edit', "/campgrounds/#{campground.id}/edit", method: :get, class: "item-button" %>
+      <%= button_to 'Delete', "/campgrounds/#{campground.id}", method: :delete, class: "item-button" %>
+    </section>
+    <p class="indent">
       (Created at: <%= campground.created_at %>)
       <% if params[:sort] %>
+        <br>
         <%= "Number of Campsites: #{campground.campsite_count}" %>
+      <% else %>
+        <br><br>
       <% end %>
     </p>
-    <%= button_to 'Edit', "/campgrounds/#{campground.id}/edit", method: :get %>
-    <%= button_to 'Delete', "/campgrounds/#{campground.id}", method: :delete %>
+
   </section>
 <% end %><br>
 

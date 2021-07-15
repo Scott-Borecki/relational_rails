@@ -1,12 +1,13 @@
-<h1><%= @campsite.name %></h1>
+<section class="container">
+  <h1 class="item-title"><%= @campsite.name %></h1>
+  <%= button_to 'Edit', "/campsites/#{@campsite.id}/edit", method: :get, class: "item-button" %>
+  <%= button_to 'Delete', "/campsites/#{@campsite.id}", method: :delete, class: "item-button" %>
+</section>
 
-<p>
+<p class="indent">
   Campsite is Tent Only: <%= @campsite.tent_only %><br>
   Overnight Fee: <%= @campsite.overnight_fee %><br>
   Campground: <%= Campground.find(@campsite.campground_id).name %><br>
   Created at: <%= @campsite.created_at %><br>
   Updated at: <%= @campsite.updated_at %>
 </p>
-
-<%= button_to 'Edit', "/campsites/#{@campsite.id}/edit", method: :get %>
-<%= button_to 'Delete', "/campsites/#{@campsite.id}", method: :delete %>

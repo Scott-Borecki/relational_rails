@@ -1,18 +1,23 @@
 <h1>All National Parks</h1>
 
 <% @national_parks.each do |national_park| %>
-  <section id="npid-<%= national_park.id %>">
-    <p>
-      <%= link_to "#{national_park.name}", "/national_parks/#{national_park.id}" %>
+  <section class="record" id="npid-<%= national_park.id %>">
+    <section class="container">
+      <%= link_to "#{national_park.name}", "/national_parks/#{national_park.id}", class: "item-title" %>
+      <%= button_to 'Edit', "/national_parks/#{national_park.id}/edit", method: :get, class: "item-button" %>
+      <%= button_to 'Delete', "/national_parks/#{national_park.id}", method: :delete, class: "item-button" %>
+    </section>
+    <p class="indent">
       (Created at: <%= national_park.created_at %>)
       <% if params[:sort] %>
+        <br>
         <%= "Number of Trails: #{national_park.trail_count}" %>
+      <% else %>
+        <br><br>
       <% end %>
-      <%= button_to 'Edit', "/national_parks/#{national_park.id}/edit", method: :get %>
-      <%= button_to 'Delete', "/national_parks/#{national_park.id}", method: :delete %>
     </p>
   </section>
 <% end %>
 
-<p><%= link_to 'New National Park', '/national_parks/new' %></p>
-<p><%= link_to 'Sort By Number of Trails', '/national_parks?sort=most_trails' %></p>
+<%= link_to 'New National Park', '/national_parks/new' %>
+<%= link_to 'Sort By Number of Trails', '/national_parks?sort=most_trails' %>

@@ -20,7 +20,7 @@ RSpec.describe 'trails index page' do
     @trails.each do |trail|
       within("#tid-#{trail.id}") do
         expect(page).to have_content(trail.name)
-        expect(page).to have_content("Loop?: #{trail.is_loop}")
+        expect(page).to have_content("Trail is a loop: #{trail.is_loop}")
         expect(page).to have_content("Length: #{trail.length}")
         expect(page).to have_content("National Park: #{NationalPark.find(trail.national_park_id).name}")
         expect(page).to have_content("Created at: #{trail.created_at}")
@@ -45,7 +45,8 @@ RSpec.describe 'trails index page' do
   end
 
   it 'can link to the index pages' do
-    pages = [['Trail Index', '/trails'],
+    pages = [['Welcome Bear', '/'],
+             ['Trail Index', '/trails'],
              ['National Park Index', '/national_parks'],
              ['Campground Index', '/campgrounds'],
              ['Campsite Index', '/campsites']]

@@ -1,17 +1,18 @@
 <h1>All Trails - Loop Only</h1>
 
 <% @trails.each do |trail| %>
-<section id="tid-<%= trail.id %>">
-  <h3><%= link_to "#{trail.name}", "/trails/#{trail.id}" %></h3>
-  <p>
-    Loop?: <%= trail.is_loop %><br>
-    Length: <%= trail.length %> miles<br>
-    National Park: <%= NationalPark.find(trail.national_park_id).name %><br>
-    Created at: <%= trail.created_at %><br>
-    Updated at: <%= trail.updated_at %>
-  </p>
-  <%= button_to 'Edit', "/trails/#{trail.id}/edit", method: :get %>
-  <%= button_to 'Delete', "/trails/#{trail.id}", method: :delete %>
-</section>
-
+  <section class="record" id="tid-<%= trail.id %>">
+    <section class="container">
+      <%= link_to "#{trail.name}", "/trails/#{trail.id}", class: "item-title" %>
+      <%= button_to 'Edit', "/trails/#{trail.id}/edit", method: :get, class: "item-button" %>
+      <%= button_to 'Delete', "/trails/#{trail.id}", method: :delete, class: "item-button" %>
+    </section>
+    <p class="indent">
+      Trail is a loop: <%= trail.is_loop %><br>
+      Length: <%= trail.length %> miles<br>
+      National Park: <%= NationalPark.find(trail.national_park_id).name %><br>
+      Created at: <%= trail.created_at %><br>
+      Updated at: <%= trail.updated_at %>
+    </p>
+  </section>
 <% end %>

@@ -7,6 +7,12 @@ RSpec.describe 'welcome index page' do
     expect(page).to have_content("Yay! You're on Relational Rails")
   end
 
+  it 'can link to the welcome bear page' do
+    visit '/'
+    click_link 'Welcome Bear'
+    expect(current_path).to eq('/')
+  end
+
   it 'can link to national parks page' do
     visit '/'
     click_link 'National Park Index'

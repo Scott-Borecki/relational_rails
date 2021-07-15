@@ -1,23 +1,25 @@
 <h1>Campsites at <%= @campground.name %></h1>
-<%= link_to "#{@campground.name} Details", "/campgrounds/#{@campground.id}", method: :get %>
+<p><%= link_to "#{@campground.name} Details", "/campgrounds/#{@campground.id}", method: :get %></p><br>
 
 <% @campsites.each do |campsite| %>
-  <section id="cgcsid<%= campsite.id %>">
-    <h3><%= link_to "#{campsite.name}", "/campsites/#{campsite.id}" %></h3>
-    <p>
+  <section class="record" id="cgcsid<%= campsite.id %>">
+    <section class='container'>
+      <%= link_to "#{campsite.name}", "/campsites/#{campsite.id}", class: "item-title" %>
+      <%= button_to 'Edit', "/campsites/#{campsite.id}/edit", method: :get, class: "item-button" %>
+      <%= button_to 'Delete', "/campsites/#{campsite.id}", method: :delete, class: "item-button" %>
+    </section>
+    <p class="indent">
       Campsite is Tent Only: <%= campsite.tent_only %><br>
       Overnight Fee: <%= campsite.overnight_fee %><br>
       Campground: <%= Campground.find(campsite.campground_id).name %><br>
       Created at: <%= campsite.created_at %><br>
       Updated at: <%= campsite.updated_at %>
     </p>
-    <%= button_to 'Edit', "/campsites/#{campsite.id}/edit", method: :get %>
-    <%= button_to 'Delete', "/campsites/#{campsite.id}", method: :delete %>
   </section>
 <% end %><br>
 
-<%= link_to 'Sort by Name', "/campgrounds/#{@campground.id}/campsites?sort=asc", method: :get %>
-<%= link_to 'Create Campsite', "/campgrounds/#{@campground.id}/campsites/new", method: :get %><br><br>
+<%= link_to 'Create Campsite', "/campgrounds/#{@campground.id}/campsites/new", method: :get %>
+<%= link_to 'Sort by Name', "/campgrounds/#{@campground.id}/campsites?sort=asc", method: :get %><br><br>
 
 <%= form_with url: "/campgrounds/#{@campground.id}/campsites?amount=#{@num}", method: :get, local: true do |form| %>
   <%= form.label :amount, 'Only return campsites with an overnight fee more than: ' %>

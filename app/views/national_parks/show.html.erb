@@ -1,14 +1,15 @@
-<h1><%= @national_park.name %></h1>
+<section class="container">
+  <h1 class="item-title"><%= @national_park.name %></h1>
+  <%= button_to 'Edit', "/national_parks/#{@national_park.id}/edit", method: :get, class: "item-button" %>
+  <%= button_to 'Delete', "/national_parks/#{@national_park.id}", method: :delete, class: "item-button" %>
+</section>
 
-<p>
+<p class="indent">
   Seasonal?: <%= @national_park.is_seasonal %><br>
   Acreage: <%= @national_park.acreage %> acres<br>
   Number of Trails: <%= @national_park.trail_count %><br>
   Created at: <%= @national_park.created_at %><br>
   Updated at: <%= @national_park.updated_at %><br>
+  <br>
+  <%= link_to "Trails at #{@national_park.name}", "/national_parks/#{@national_park.id}/trails"%>
 </p>
-
-<%= button_to 'Edit', "/national_parks/#{@national_park.id}/edit", method: :get %>
-<%= button_to 'Delete', "/national_parks/#{@national_park.id}", method: :delete %><br>
-
-<%= link_to "Trails at #{@national_park.name}", "/national_parks/#{@national_park.id}/trails"%>

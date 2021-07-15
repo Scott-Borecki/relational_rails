@@ -10,13 +10,15 @@
   </head>
 
   <body>
-    <nav>
-      <%= link_to 'Bear', '/' %> |
-      <%= link_to 'National Park Index', '/national_parks' %> |
-      <%= link_to 'Trail Index', '/trails' %> |
-      <%= link_to 'Campground Index', '/campgrounds' %> |
+    <nav class="navigation">
+      <%= link_to 'Welcome Bear', '/' %>
+      <%= link_to 'National Park Index', '/national_parks' %>
+      <%= link_to 'Trail Index', '/trails' %>
+      <%= link_to 'Campground Index', '/campgrounds' %>
       <%= link_to 'Campsite Index', '/campsites' %>
     </nav>
-    <%= yield %>
+    <section class="content">
+      <%= yield %>
+    </section>
   </body>
 </html>

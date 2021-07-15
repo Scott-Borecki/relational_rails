@@ -1,22 +1,23 @@
 <h1>Trails at <%= @national_park.name %> National Park</h1>
-<%= link_to "#{@national_park.name} Details", "/national_parks/#{@national_park.id}" %>
+<p><%= link_to "#{@national_park.name} National Park Details", "/national_parks/#{@national_park.id}" %></p><br>
 
 <% @trails.each do |trail| %>
-  <section id="nptid-<%= @national_park.id %>-<%= trail.id %>">
-    <h3><%= link_to "#{trail.name}", "/trails/#{trail.id}" %></h3>
-    <p>
+  <section class="record" id="nptid-<%= @national_park.id %>-<%= trail.id %>">
+    <section class='container'>
+      <%= link_to "#{trail.name}", "/trails/#{trail.id}", class: "item-title" %>
+      <%= button_to 'Edit', "/trails/#{trail.id}/edit", method: :get, class: "item-button" %>
+      <%= button_to 'Delete', "/trails/#{trail.id}", method: :delete, class: "item-button" %>
+    </section>
+    <p class='indent'>
       Loop?: <%= trail.is_loop %><br>
       Length: <%= trail.length %> miles<br>
       Created at: <%= trail.created_at %><br>
       Updated at: <%= trail.updated_at %>
     </p>
-
-    <%= button_to 'Edit', "/trails/#{trail.id}/edit", method: :get %>
-    <%= button_to 'Delete', "/trails/#{trail.id}", method: :delete %>
   </section>
 
-<% end %>
-<br>
+<% end %><br>
+
 <%= link_to 'Create Trail', "/national_parks/#{@national_park.id}/trails/new" %>
 <%= link_to 'Sort Trails By Name', "/national_parks/#{@national_park.id}/trails?sort=name_asc" %>
 <br><br>

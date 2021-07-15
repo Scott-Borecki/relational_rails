@@ -22,7 +22,8 @@ RSpec.describe 'the national parks new page' do
   end
 
   it 'can link to the index pages' do
-    pages = [['Trail Index', '/trails'],
+    pages = [['Welcome Bear', '/'],
+             ['Trail Index', '/trails'],
              ['National Park Index', '/national_parks'],
              ['Campground Index', '/campgrounds'],
              ['Campsite Index', '/campsites']]

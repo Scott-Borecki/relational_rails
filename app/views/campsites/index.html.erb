@@ -1,16 +1,18 @@
 <h1>All Campsites - Tent Only</h1>
 
 <% @campsites.each do |campsite| %>
-  <section id="csid<%= campsite.id %>">
-    <h3><%= link_to "#{campsite.name}", "/campsites/#{campsite.id}", method: :get %></h3>
-    <p>
+  <section class="record" id="csid<%= campsite.id %>">
+    <section class="container">
+      <%= link_to "#{campsite.name}", "/campsites/#{campsite.id}", method: :get, class: "item-title" %>
+      <%= button_to 'Edit', "/campsites/#{campsite.id}/edit", method: :get, class: "item-button" %>
+      <%= button_to 'Delete', "/campsites/#{campsite.id}", method: :delete, class: "item-button" %>
+    </section>
+    <p class="indent">
       Campsite is Tent Only: <%= campsite.tent_only %><br>
       Overnight Fee: <%= campsite.overnight_fee %><br>
       Campground: <%= Campground.find(campsite.campground_id).name %><br>
       Created at: <%= campsite.created_at %><br>
       Updated at: <%= campsite.updated_at %>
     </p>
-    <%= button_to 'Edit', "/campsites/#{campsite.id}/edit", method: :get %>
-    <%= button_to 'Delete', "/campsites/#{campsite.id}", method: :delete %>
   </section>
 <% end %>
